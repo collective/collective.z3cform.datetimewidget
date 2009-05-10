@@ -1,5 +1,5 @@
 <input type="text" id="" name="" class="" title="" lang="" disabled=""
-       readonly="" alt="" tabindex="" accesskey="" size="" maxlength="2"
+       readonly="" alt="" tabindex="" accesskey="" size="2" maxlength="2"
        tal:attributes="id string:${view/id}-day;
                        name string:${view/name}-day;
                        class view/klass;
@@ -56,7 +56,7 @@
             tal:content="item/content">label</option>
 </select> /
 <input type="text" id="" name="" class="" title="" lang="" disabled=""
-       readonly="" alt="" tabindex="" accesskey="" size="" maxlength="4"
+       readonly="" alt="" tabindex="" accesskey="" size="4" maxlength="4"
        tal:attributes="id string:${view/id}-year;
                        name string:${view/name}-year;
                        class view/klass;
@@ -80,9 +80,9 @@
                        onblur view/onblur;
                        onchange view/onchange;
                        readonly view/readonly;
-                       onselect view/onselect;" /> &nlbr;
+                       onselect view/onselect;" /> &nbsp;
 <input type="text" id="" name="" class="" title="" lang="" disabled=""
-       readonly="" alt="" tabindex="" accesskey="" size="" maxlength="4"
+       readonly="" alt="" tabindex="" accesskey="" size="2" maxlength="2"
        tal:attributes="id string:${view/id}-hour;
                        name string:${view/name}-hour;
                        class view/klass;
@@ -108,7 +108,7 @@
                        readonly view/readonly;
                        onselect view/onselect;" /> :
 <input type="text" id="" name="" class="" title="" lang="" disabled=""
-       readonly="" alt="" tabindex="" accesskey="" size="" maxlength="4"
+       readonly="" alt="" tabindex="" accesskey="" size="2" maxlength="2"
        tal:attributes="id string:${view/id}-min;
                        name string:${view/name}-min;
                        class view/klass;
