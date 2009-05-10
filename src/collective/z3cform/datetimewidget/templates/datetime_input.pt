@@ -47,8 +47,7 @@
                         tabindex view/tabindex;
                         onfocus view/onfocus;
                         onblur view/onblur;
-                        onchange view/onchange;
-                        size view/size">
+                        onchange view/onchange;">
     <option value="" selected=""
             tal:repeat="item view/months"
             tal:attributes="value item/value;
