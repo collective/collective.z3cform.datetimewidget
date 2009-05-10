@@ -44,16 +44,13 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
         z3c.form.browser.widget.addFieldClass(self)
 
     def months(self):
-        # TODO :: check that months names are locales awared
-        monthNames = ['January', 'February', 'March', 'April', 'May',
-                      'June', 'July', 'August', 'September',
-                      'October', 'November', 'December']
+        monthNames = self.request.locale.dates.calendars['gregorian'].getMonthNames()
 
-        for i in monthNames:
+        for i, month in enumerate(monthNames):
             # TODO :: check if month was selected
             yield dict(
-                content  = i,
-                value    = monthNames.index(i)+1,
+                content  = month,
+                value    = i+1,
                 selected = False,)
 
 @zope.component.adapter(zope.schema.interfaces.IField, z3c.form.interfaces.IFormLayer)
