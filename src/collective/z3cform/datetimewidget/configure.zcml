@@ -1,0 +1,58 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:z3c="http://namespaces.zope.org/z3c"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="collective.z3cform.datetimewidget">
+
+    <include package="z3c.form" />
+
+    <class class=".widget.DateWidget">
+        <require permission="zope.Public"
+                 interface=".interfaces.IDateWidget" />
+    </class>
+    <class class=".widget.DatetimeWidget">
+        <require permission="zope.Public"
+                 interface=".interfaces.IDatetimeWidget" />
+    </class>
+
+    <adapter
+        factory=".widget.DateFieldWidget"
+        for="zope.schema.interfaces.IDate
+             z3c.form.interfaces.IFormLayer" />
+    <adapter
+        factory=".widget.DatetimeFieldWidget"
+        for="zope.schema.interfaces.IDatetime
+             z3c.form.interfaces.IFormLayer" />
+
+    <z3c:widgetTemplate
+        mode="display"
+ 		widget=".interfaces.IDateWidget"        
+ 		layer="z3c.form.interfaces.IFormLayer"
+ 		template="templates/date_display.pt" />
+    <z3c:widgetTemplate
+        mode="input"
+ 		widget=".interfaces.IDateWidget"        
+ 		layer="z3c.form.interfaces.IFormLayer"
+ 		template="templates/date_input.pt" />
+    <z3c:widgetTemplate
+        mode="hidden"
+ 		widget=".interfaces.IDateWidget"        
+ 		layer="z3c.form.interfaces.IFormLayer"
+ 		template="templates/date_hidden.pt" />
+    <z3c:widgetTemplate
+        mode="display"
+ 		widget=".interfaces.IDatetimeWidget"        
+ 		layer="z3c.form.interfaces.IFormLayer"
+ 		template="templates/datetime_display.pt" />
+    <z3c:widgetTemplate
+        mode="input"
+ 		widget=".interfaces.IDatetimeWidget"        
+ 		layer="z3c.form.interfaces.IFormLayer"
+ 		template="templates/datetime_input.pt" />
+    <z3c:widgetTemplate
+        mode="hidden"
+ 		widget=".interfaces.IDatetimeWidget"        
+ 		layer="z3c.form.interfaces.IFormLayer"
+ 		template="templates/datetime_hidden.pt" />
+
+</configure>
