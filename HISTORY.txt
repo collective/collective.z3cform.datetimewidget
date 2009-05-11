@@ -1,7 +1,8 @@
 Changelog
 =========
 
-0.1 (xxxx-xx-xx)
-----------------
+0.1a1 (2009-05-11)
+------------------
 
-* Initial release
+ * Initial release
+
