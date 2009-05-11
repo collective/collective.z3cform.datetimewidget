@@ -2,8 +2,6 @@
 Date and Time Widgets
 =====================
 
-..todo:: add test for hidden mode
-
 The ``collective.z3cform.datetimewidget`` library provides a form framework
 and widgets. This document ensures that we implement a widget for Date and
 Datetime field defined in ``zope.schema``. Take a look at the different widget 
