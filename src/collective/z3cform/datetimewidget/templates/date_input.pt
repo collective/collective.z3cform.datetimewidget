@@ -16,7 +16,7 @@
                        onkeypress view/onkeypress;
                        onkeydown view/onkeydown;
                        onkeyup view/onkeyup;
-                       value view/value;
+                       value view/value/day|nothing;
                        disabled view/disabled;
                        tabindex view/tabindex;
                        onfocus view/onfocus;
@@ -26,7 +26,7 @@
                        alt view/alt;
                        accesskey view/accesskey;
                        onselect view/onselect;" /> /
-<select id="" name="" class="" tabindex="" disabled="" size=""
+<select id="" name="" class="" tabindex="" disabled=""
         tal:attributes="id string:${view/id}-month;
                         name string:${view/name}-month:list;
                         class view/klass;
@@ -47,8 +47,7 @@
                         tabindex view/tabindex;
                         onfocus view/onfocus;
                         onblur view/onblur;
-                        onchange view/onchange;
-                        size view/size">
+                        onchange view/onchange">
     <option value="" selected=""
             tal:repeat="item view/months"
             tal:attributes="value item/value;
@@ -73,7 +72,7 @@
                        onkeypress view/onkeypress;
                        onkeydown view/onkeydown;
                        onkeyup view/onkeyup;
-                       value view/value;
+                       value view/value/year|nothing;
                        disabled view/disabled;
                        tabindex view/tabindex;
                        onfocus view/onfocus;

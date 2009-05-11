@@ -32,8 +32,9 @@ also define a helper method for test the widgets:
 
   >>> from z3c.form import interfaces
   >>> from z3c.form.testing import TestRequest
+  >>> from zope.i18n.locales import locales
   >>> def setupWidget(field):
-  ...     request = TestRequest()
+  ...     request = TestRequest(HTTP_ACCEPT_LANGUAGE = 'en')
   ...     widget = zope.component.getMultiAdapter((field, request),
   ...         interfaces.IFieldWidget)
   ...     widget.id = 'foo'
@@ -49,14 +50,14 @@ Date
   >>> widget.update()
   >>> print widget.render()
   <input type="text" id="foo-day" name="bar-day"
-         class="date-widget required date-field" size=""
-         maxlength="2" value="07/04/01" /> /
+         class="date-widget required date-field" size="2"
+         maxlength="2" value="1" /> /
   <select id="foo-month" name="bar-month:list"
           class="date-widget required date-field">
       <option value="1">January</option>
       <option value="2">February</option>
       <option value="3">March</option>
-      <option value="4">April</option>
+      <option value="4" selected="selected">April</option>
       <option value="5">May</option>
       <option value="6">June</option>
       <option value="7">July</option>
@@ -68,12 +69,12 @@ Date
   </select> /
   <input type="text" id="foo-year" name="bar-year"
          class="date-widget required date-field" alt=""
-         accesskey="" size="" maxlength="4" value="07/04/01" />
+         accesskey="" size="4" maxlength="4" value="2007" />
   <input name="bar-empty-marker" type="hidden" value="1" />
 
   >>> widget.mode = interfaces.DISPLAY_MODE
   >>> print widget.render()
-  <span id="foo" class="date-widget required date-field">07/04/01</span>
+  <span id="foo" class="date-widget required date-field">4/1/07</span>
 
 
 Datetime
@@ -85,13 +86,13 @@ Datetime
   >>> print widget.render()
   <input type="text" id="foo-day" name="bar-day"
            class="datetime-widget required datetime-field datetime-field"
-           size="" maxlength="2" value="07/04/01 12:00" /> /
+           size="2" maxlength="2" value="1" /> /
     <select id="foo-month" name="bar-month:list"
             class="datetime-widget required datetime-field datetime-field">
         <option value="1">January</option>
         <option value="2">February</option>
         <option value="3">March</option>
-        <option value="4">April</option>
+        <option value="4" selected="selected">April</option>
         <option value="5">May</option>
         <option value="6">June</option>
         <option value="7">July</option>
@@ -103,16 +104,14 @@ Datetime
     </select> /
     <input type="text" id="foo-year" name="bar-year"
            class="datetime-widget required datetime-field datetime-field"
-           alt="" accesskey="" size="" maxlength="4"
-           value="07/04/01 12:00" /> &nlbr;
+           alt="" accesskey="" size="4" maxlength="4"
+           value="2007" /> &nbsp;
     <input type="text" id="foo-hour" name="bar-hour"
            class="datetime-widget required datetime-field datetime-field"
-           alt="" accesskey="" size="" maxlength="4"
-           value="07/04/01 12:00" /> :
+           alt="" accesskey="" size="2" maxlength="2" value="12" /> :
     <input type="text" id="foo-min" name="bar-min"
            class="datetime-widget required datetime-field datetime-field"
-           alt="" accesskey="" size="" maxlength="4"
-           value="07/04/01 12:00" />
+           alt="" accesskey="" size="2" maxlength="2" value="00" />
     <!-- TODO :: AM/PM missing -->
     <input name="bar-empty-marker" type="hidden" value="1" />
 
@@ -120,5 +119,5 @@ Datetime
   >>> widget.mode = interfaces.DISPLAY_MODE
   >>> print widget.render()
   <span id="foo"
-          class="datetime-widget required datetime-field datetime-field">07/04/01 12:00</span>
+        class="datetime-widget required datetime-field datetime-field">4/1/07 12:00 PM</span>
 

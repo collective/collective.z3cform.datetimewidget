@@ -37,7 +37,7 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
     zope.interface.implementsOnly(IDateWidget)
 
     klass = u'date-widget'
-    value = u''
+    value = None
 
     def update(self):
         super(DateWidget, self).update()
@@ -46,12 +46,23 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
     def months(self):
         monthNames = self.request.locale.dates.calendars['gregorian'].getMonthNames()
 
+        try:
+            selected = self.value.month
+        except AttributeError:
+            selected = -1
+
         for i, month in enumerate(monthNames):
             # TODO :: check if month was selected
             yield dict(
                 content  = month,
                 value    = i+1,
-                selected = False,)
+                selected = (i+1 == selected),
+                )
+    
+    @property
+    def formatted_value(self):
+        formatter = self.request.locale.dates.getFormatter("date", "short")
+        return formatter.format(self.value)
 
 @zope.component.adapter(zope.schema.interfaces.IField, z3c.form.interfaces.IFormLayer)
 @zope.interface.implementer(z3c.form.interfaces.IFieldWidget)
@@ -66,11 +77,36 @@ class DatetimeWidget(DateWidget):
     zope.interface.implementsOnly(IDatetimeWidget)
 
     klass = u'datetime-widget'
-    value = u''
+    value = None
 
     def update(self):
         super(DatetimeWidget, self).update()
         z3c.form.browser.widget.addFieldClass(self)
+
+    @property
+    def formatted_value(self):
+        formatter = self.request.locale.dates.getFormatter("dateTime", "short")
+        return formatter.format(self.value)
+
+    def _padded_value(self, value):
+        value = unicode(value)
+        if len(value) == 1:
+            value = u'0' + value
+        return value
+    
+    def padded_hour(self):
+        try:
+            hour = self.value.hour
+        except AttributeError:
+            hour = 0
+        return self._padded_value(hour)
+
+    def padded_minute(self):
+        try:
+            minute = self.value.minute
+        except AttributeError:
+            minute = 0
+        return self._padded_value(minute)
 
 @zope.component.adapter(zope.schema.interfaces.IField, z3c.form.interfaces.IFormLayer)
 @zope.interface.implementer(z3c.form.interfaces.IFieldWidget)
