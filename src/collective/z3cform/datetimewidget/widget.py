@@ -20,15 +20,15 @@
 #############################################################################
 __docformat__ = "reStructuredText"
 
+from datetime import date, datetime
+
 import zope.component
 import zope.interface
 import zope.schema
 import z3c.form.widget
 import z3c.form.browser.widget
-
-from collective.z3cform.datetimewidget.interfaces import IDateWidget
-from collective.z3cform.datetimewidget.interfaces import IDatetimeWidget
-
+from z3c.form import interfaces
+from collective.z3cform.datetimewidget.interfaces import IDateWidget, IDatetimeWidget
 
 class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
                  z3c.form.widget.Widget):
@@ -37,7 +37,7 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
     zope.interface.implementsOnly(IDateWidget)
 
     klass = u'date-widget'
-    value = None
+    value = ('', '', '')
 
     def update(self):
         super(DateWidget, self).update()
@@ -47,8 +47,8 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
         monthNames = self.request.locale.dates.calendars['gregorian'].getMonthNames()
 
         try:
-            selected = self.value.month
-        except AttributeError:
+            selected = int(self.month)
+        except:
             selected = -1
 
         for i, month in enumerate(monthNames):
@@ -61,8 +61,30 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
     
     @property
     def formatted_value(self):
+        if self.value == ('', '', ''):
+            return ''
         formatter = self.request.locale.dates.getFormatter("date", "short")
-        return formatter.format(self.value)
+        return formatter.format(date(*self.value))
+    
+    @property
+    def year(self):
+        return self.value[0]
+    
+    @property
+    def month(self):
+        return self.value[1]
+    
+    @property
+    def day(self):
+        return self.value[2]
+    
+    def extract(self, default=interfaces.NOVALUE):
+        day = self.request.get(self.name + '-day', default)
+        month = self.request.get(self.name + '-month', default)
+        year = self.request.get(self.name + '-year', default)
+        if default in (year, month, day):
+            return default
+        return (year, month, day)
 
 @zope.component.adapter(zope.schema.interfaces.IField, z3c.form.interfaces.IFormLayer)
 @zope.interface.implementer(z3c.form.interfaces.IFieldWidget)
@@ -77,7 +99,7 @@ class DatetimeWidget(DateWidget):
     zope.interface.implementsOnly(IDatetimeWidget)
 
     klass = u'datetime-widget'
-    value = None
+    value = ('', '', '', '00', '00')
 
     def update(self):
         super(DatetimeWidget, self).update()
@@ -85,28 +107,40 @@ class DatetimeWidget(DateWidget):
 
     @property
     def formatted_value(self):
+        if self.value == ('', '', '', '00', '00'):
+            return ''
         formatter = self.request.locale.dates.getFormatter("dateTime", "short")
-        return formatter.format(self.value)
+        return formatter.format(datetime(*self.value))
+
+    @property
+    def hour(self):
+        return self.value[3]
+
+    @property
+    def minute(self):
+        return self.value[4]
 
     def _padded_value(self, value):
         value = unicode(value)
-        if len(value) == 1:
+        if value and len(value) == 1:
             value = u'0' + value
         return value
-    
+
     def padded_hour(self):
-        try:
-            hour = self.value.hour
-        except AttributeError:
-            hour = 0
-        return self._padded_value(hour)
+        return self._padded_value(self.hour)
 
     def padded_minute(self):
-        try:
-            minute = self.value.minute
-        except AttributeError:
-            minute = 0
-        return self._padded_value(minute)
+        return self._padded_value(self.minute)
+
+    def extract(self, default=interfaces.NOVALUE):
+        day = self.request.get(self.name + '-day', default)
+        month = self.request.get(self.name + '-month', default)
+        year = self.request.get(self.name + '-year', default)
+        hour = self.request.get(self.name + '-hour', default)
+        minute = self.request.get(self.name + '-min', default)
+        if default in (year, month, day, hour, minute):
+            return default
+        return (year, month, day, hour, minute)
 
 @zope.component.adapter(zope.schema.interfaces.IField, z3c.form.interfaces.IFormLayer)
 @zope.interface.implementer(z3c.form.interfaces.IFieldWidget)

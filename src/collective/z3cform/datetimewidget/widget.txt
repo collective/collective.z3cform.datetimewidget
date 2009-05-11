@@ -52,7 +52,7 @@ Date
   <input type="text" id="foo-day" name="bar-day"
          class="date-widget required date-field" size="2"
          maxlength="2" value="1" /> /
-  <select id="foo-month" name="bar-month:list"
+  <select id="foo-month" name="bar-month"
           class="date-widget required date-field">
       <option value="1">January</option>
       <option value="2">February</option>
@@ -87,7 +87,7 @@ Datetime
   <input type="text" id="foo-day" name="bar-day"
            class="datetime-widget required datetime-field datetime-field"
            size="2" maxlength="2" value="1" /> /
-    <select id="foo-month" name="bar-month:list"
+    <select id="foo-month" name="bar-month"
             class="datetime-widget required datetime-field datetime-field">
         <option value="1">January</option>
         <option value="2">February</option>

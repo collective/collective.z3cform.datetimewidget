@@ -16,7 +16,7 @@
                        onkeypress view/onkeypress;
                        onkeydown view/onkeydown;
                        onkeyup view/onkeyup;
-                       value view/value/day|nothing;
+                       value view/day;
                        disabled view/disabled;
                        tabindex view/tabindex;
                        onfocus view/onfocus;
@@ -28,7 +28,7 @@
                        onselect view/onselect;" /> /
 <select id="" name="" class="" tabindex="" disabled=""
         tal:attributes="id string:${view/id}-month;
-                        name string:${view/name}-month:list;
+                        name string:${view/name}-month;
                         class view/klass;
                         style view/style;
                         title view/title;
@@ -72,7 +72,7 @@
                        onkeypress view/onkeypress;
                        onkeydown view/onkeydown;
                        onkeyup view/onkeyup;
-                       value view/value/year|nothing;
+                       value view/year;
                        disabled view/disabled;
                        tabindex view/tabindex;
                        onfocus view/onfocus;

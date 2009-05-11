@@ -39,5 +39,11 @@ def test_suite():
                         doctest.NORMALIZE_WHITESPACE |
                         doctest.ELLIPSIS,
             ),
+        doctest.DocFileSuite('converter.txt',
+            setUp=setUp, tearDown=tearDown,
+            optionflags=doctest.REPORT_ONLY_FIRST_FAILURE |
+                        doctest.NORMALIZE_WHITESPACE |
+                        doctest.ELLIPSIS,
+            ),
         ))
 

@@ -25,11 +25,11 @@
              z3c.form.interfaces.IFormLayer" />
 
     <adapter
-        factory=".converter.NullDataConverter"
+        factory=".converter.DateDataConverter"
         for="zope.schema.interfaces.IDate
              collective.z3cform.datetimewidget.interfaces.IDateWidget" />
     <adapter
-        factory=".converter.NullDataConverter"
+        factory=".converter.DatetimeDataConverter"
         for="zope.schema.interfaces.IDatetime
              collective.z3cform.datetimewidget.interfaces.IDatetimeWidget" />
 

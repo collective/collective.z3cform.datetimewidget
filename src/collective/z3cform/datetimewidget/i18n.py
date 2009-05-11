@@ -20,18 +20,6 @@
 #############################################################################
 __docformat__ = "reStructuredText"
 
-from z3c.form.interfaces import IWidget
-from zope.schema import ValidationError
-from collective.z3cform.datetimewidget.i18n import MessageFactory as _
+import zope.i18nmessageid
 
-class IDateWidget(IWidget):
-    """ Date widget marker for z3c.form """
-
-class IDatetimeWidget(IWidget):
-    """ Datetime widget marker for z3c.form """
-
-class DateValidationError(ValidationError):
-    __doc__ = _(u'Please enter a valid date.')
-
-class DatetimeValidationError(ValidationError):
-    __doc__ = _(u'Please enter a valid date and time.')
+MessageFactory = zope.i18nmessageid.MessageFactory('collective.z3cform.datetimewidget')
