@@ -52,7 +52,6 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
             selected = -1
 
         for i, month in enumerate(monthNames):
-            # TODO :: check if month was selected
             yield dict(
                 content  = month,
                 value    = i+1,
@@ -100,10 +99,7 @@ class DatetimeWidget(DateWidget):
 
     klass = u'datetime-widget'
     value = ('', '', '', '00', '00')
-
-    def update(self):
-        super(DatetimeWidget, self).update()
-        z3c.form.browser.widget.addFieldClass(self)
+    ampm  = False
 
     @property
     def formatted_value(self):
@@ -126,8 +122,16 @@ class DatetimeWidget(DateWidget):
             value = u'0' + value
         return value
 
+    def is_pm(self):
+        if int(self.hour) >= 12:
+            return True
+        return False
+
     def padded_hour(self):
-        return self._padded_value(self.hour)
+        hour = self.hour
+        if self.ampm is True and self.is_pm() and int(hour) != 12:
+            hour = str(int(hour)-12)
+        return self._padded_value(hour)
 
     def padded_minute(self):
         return self._padded_value(self.minute)
@@ -138,8 +142,19 @@ class DatetimeWidget(DateWidget):
         year = self.request.get(self.name + '-year', default)
         hour = self.request.get(self.name + '-hour', default)
         minute = self.request.get(self.name + '-min', default)
+
         if default in (year, month, day, hour, minute):
             return default
+
+        if self.ampm is True and hour != '12':
+            ampm = self.request.get(self.name + '-ampm', default)
+            if ampm == 'PM':
+                hour = str(12+int(hour))
+            # something strange happened since we either
+            # should have 'PM' or 'AM', return default
+            elif ampm != 'AM':
+                return default
+
         return (year, month, day, hour, minute)
 
 @zope.component.adapter(zope.schema.interfaces.IField, z3c.form.interfaces.IFormLayer)

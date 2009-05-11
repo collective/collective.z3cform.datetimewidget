@@ -132,6 +132,33 @@
                        onchange view/onchange;
                        readonly view/readonly;
                        onselect view/onselect;" />
-<!-- TODO :: AM/PM missing -->
+<select id="" name="" class="" tabindex="" disabled=""
+        tal:condition="view/ampm"
+        tal:attributes="id string:${view/id}-month;
+                        name string:${view/name}-month;
+                        class view/klass;
+                        style view/style;
+                        title view/title;
+                        lang view/lang;
+                        onclick view/onclick;
+                        ondblclick view/ondblclick;
+                        onmousedown view/onmousedown;
+                        onmouseup view/onmouseup;
+                        onmouseover view/onmouseover;
+                        onmousemove view/onmousemove;
+                        onmouseout view/onmouseout;
+                        onkeypress view/onkeypress;
+                        onkeydown view/onkeydown;
+                        onkeyup view/onkeyup;
+                        disabled view/disabled;
+                        tabindex view/tabindex;
+                        onfocus view/onfocus;
+                        onblur view/onblur;
+                        onchange view/onchange;">
+    <option tal:attributes="selected python:not view.is_pm() and 'selected' or ''"
+            value="AM" selected="">AM</option>
+    <option tal:attributes="selected python:view.is_pm() and 'selected' or ''"
+            value="PM" selected="">PM</option>
+</select>
 <input name="field-empty-marker" type="hidden" value="1"
        tal:attributes="name string:${view/name}-empty-marker" />
