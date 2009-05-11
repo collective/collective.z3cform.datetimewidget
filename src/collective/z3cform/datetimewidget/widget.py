@@ -129,7 +129,7 @@ class DatetimeWidget(DateWidget):
 
     def padded_hour(self):
         hour = self.hour
-        if self.ampm is True and self.is_pm() and int(hour) != 12:
+        if self.ampm is True and self.is_pm() and int(hour)!=12:
             hour = str(int(hour)-12)
         return self._padded_value(hour)
 
@@ -146,7 +146,7 @@ class DatetimeWidget(DateWidget):
         if default in (year, month, day, hour, minute):
             return default
 
-        if self.ampm is True and hour != '12':
+        if self.ampm is True and int(hour)!=12:
             ampm = self.request.get(self.name + '-ampm', default)
             if ampm == 'PM':
                 hour = str(12+int(hour))
