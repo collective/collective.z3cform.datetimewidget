@@ -17,7 +17,7 @@ TODO
 
  * create DateDeltaWidget and DatetimeDeltaWidget
 
-Contrubutors
+Contributors
 ============
 
  * David Glick - davisagli

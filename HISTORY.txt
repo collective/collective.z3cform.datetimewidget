@@ -1,8 +1,15 @@
 Changelog
 =========
 
+0.1a2 (2009-05-28)
+------------------
+
+* Register the widgets for custom interfaces that we apply to the standard
+  datetime fields, to work around a problem with ZCML conflicting with
+  z3c.form.
+  [davisagli]
+
 0.1a1 (2009-05-11)
 ------------------
 
  * Initial release
-

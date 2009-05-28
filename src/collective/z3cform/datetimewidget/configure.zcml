@@ -15,13 +15,19 @@
                  interface=".interfaces.IDatetimeWidget" />
     </class>
 
+    <class class="zope.schema._field.Date">
+        <implements interface=".interfaces.IDateField"/>
+    </class>
+    <class class="zope.schema._field.Datetime">
+        <implements interface=".interfaces.IDatetimeField"/>
+    </class>
     <adapter
         factory=".widget.DateFieldWidget"
-        for="zope.schema.interfaces.IDate
+        for=".interfaces.IDateField
              z3c.form.interfaces.IFormLayer" />
     <adapter
         factory=".widget.DatetimeFieldWidget"
-        for="zope.schema.interfaces.IDatetime
+        for=".interfaces.IDatetimeField
              z3c.form.interfaces.IFormLayer" />
 
     <adapter

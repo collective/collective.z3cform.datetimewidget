@@ -21,8 +21,15 @@
 __docformat__ = "reStructuredText"
 
 from z3c.form.interfaces import IWidget
+from zope.schema import interfaces
 from zope.schema import ValidationError
 from collective.z3cform.datetimewidget.i18n import MessageFactory as _
+
+class IDateField(interfaces.IDate):
+    """ Special marker for date fields that use our widget """
+
+class IDatetimeField(interfaces.IDatetime):
+    """ Special marker for datetime fields that use our widget """
 
 class IDateWidget(IWidget):
     """ Date widget marker for z3c.form """
