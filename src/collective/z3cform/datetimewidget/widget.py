@@ -76,21 +76,21 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
     def year(self):
         year = self.request.get(self.name+'-year', None)
 	if year:
-	    return year
+        return year
         return self.value[0]
     
     @property
     def month(self):
         month = self.request.get(self.name+'-month', None)
 	if month:
-	    return month
+        return month
         return self.value[1]
     
     @property
     def day(self):
         day = self.request.get(self.name+'-day', None)
-	if day: 
-	    return day
+	if day:
+        return day
         return self.value[2]
     
     def extract(self, default=interfaces.NOVALUE):
