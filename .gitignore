@@ -1,6 +1,10 @@
+*.pyc
 .installed.cfg
 bin/
+coverage/
 develop-eggs/
+dist/
+eggs/
 include/
 lib/
-
+src/collective.z3cform.datetimewidget.egg-info/

@@ -1,15 +1,31 @@
 Changelog
 =========
 
+0.1a4 (2009-06-05)
+------------------
+
+ * MANIFEST.in file fixed, now includes README.txt and HISTORY.txt [garbas]
+
+0.1a3 (2009-06-05)
+------------------
+
+* widget was not showing values from request [garbas]
+* ISSUE 1: SOLVED [garbas]
+  After some testing I have seen that some validations are missing, therefore
+  I get an error when adding values like '99' into the year field:
+  "ValueError: year=99 is before 1900; the datetime strftime() methods require
+  year >= 1900"
+
+
 0.1a2 (2009-05-28)
 ------------------
 
 * Register the widgets for custom interfaces that we apply to the standard
   datetime fields, to work around a problem with ZCML conflicting with
-  z3c.form.
-  [davisagli]
+  z3c.form. [davisagli]
 
 0.1a1 (2009-05-11)
 ------------------
 
  * Initial release
+
