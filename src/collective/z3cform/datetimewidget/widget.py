@@ -75,22 +75,22 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
     @property
     def year(self):
         year = self.request.get(self.name+'-year', None)
-	if year:
-        return year
+        if year:
+            return year
         return self.value[0]
     
     @property
     def month(self):
         month = self.request.get(self.name+'-month', None)
-	if month:
-        return month
+        if month:
+            return month
         return self.value[1]
     
     @property
     def day(self):
         day = self.request.get(self.name+'-day', None)
-	if day:
-        return day
+        if day:
+            return day
         return self.value[2]
     
     def extract(self, default=interfaces.NOVALUE):
@@ -132,15 +132,15 @@ class DatetimeWidget(DateWidget):
     @property
     def hour(self):
         hour = self.request.get(self.name+'-hour', None)
-	if hour:
-        return hour
+        if hour:
+            return hour
         return self.value[3]
 
     @property
     def minute(self):
         min = self.request.get(self.name+'-min', None)
-	if min:
-        return min
+        if min:
+            return min
         return self.value[4]
 
     def _padded_value(self, value):

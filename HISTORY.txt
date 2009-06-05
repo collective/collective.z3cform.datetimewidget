@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.1a6 (2009-06-05)
+------------------
+
+ * intendation problem again, this just isnt my day, tests passing [garbas]
+
 0.1a5 (2009-06-05)
 ------------------
 
