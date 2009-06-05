@@ -1,0 +1,3 @@
+recursive-include src/collective *
+global-exclude *pyc
+

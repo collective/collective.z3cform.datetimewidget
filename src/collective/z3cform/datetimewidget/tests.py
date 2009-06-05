@@ -23,7 +23,7 @@ __docformat__ = "reStructuredText"
 import unittest
 from zope.app.testing import setup
 from zope.testing import doctest
-
+from z3c.form import testing
 
 def setUp(test):
     test.globs = {'root': setup.placefulSetUp(True)}
@@ -41,6 +41,12 @@ def test_suite():
             ),
         doctest.DocFileSuite('converter.txt',
             setUp=setUp, tearDown=tearDown,
+            optionflags=doctest.REPORT_ONLY_FIRST_FAILURE |
+                        doctest.NORMALIZE_WHITESPACE |
+                        doctest.ELLIPSIS,
+            ),
+        doctest.DocFileSuite('issues.txt',
+            setUp=testing.setUp, tearDown=testing.tearDown,
             optionflags=doctest.REPORT_ONLY_FIRST_FAILURE |
                         doctest.NORMALIZE_WHITESPACE |
                         doctest.ELLIPSIS,

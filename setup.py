@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-version = '0.1a2'
+version = '0.1a3'
 
 setup(name='collective.z3cform.datetimewidget',
       version=version,
@@ -26,6 +26,7 @@ setup(name='collective.z3cform.datetimewidget',
           # -*- Extra requirements: -*-
           'z3c.form',
       ],
+      extras_require=dict(test=['z3c.form','zope.testing', 'zc.buildout']),
       entry_points="""
       # -*- Entry points: -*-
       """,

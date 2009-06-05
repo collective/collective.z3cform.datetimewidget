@@ -38,7 +38,8 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
 
     klass = u'date-widget'
     value = ('', '', '')
-
+    
+    
     def update(self):
         super(DateWidget, self).update()
         z3c.form.browser.widget.addFieldClass(self)
@@ -57,24 +58,39 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
                 value    = i+1,
                 selected = (i+1 == selected),
                 )
-    
+   
     @property
     def formatted_value(self):
         if self.value == ('', '', ''):
             return ''
         formatter = self.request.locale.dates.getFormatter("date", "short")
-        return formatter.format(date(*self.value))
+        date_value = date(*map(int, self.value))
+	if date_value.year > 1900:
+            return formatter.format(date_value)
+        # due to fantastic datetime.strftime we need this hack
+	# for now ctime is default
+	return date_value.ctime()
+
     
     @property
     def year(self):
+        year = self.request.get(self.name+'-year', None)
+	if year:
+	    return year
         return self.value[0]
     
     @property
     def month(self):
+        month = self.request.get(self.name+'-month', None)
+	if month:
+	    return month
         return self.value[1]
     
     @property
     def day(self):
+        day = self.request.get(self.name+'-day', None)
+	if day: 
+	    return day
         return self.value[2]
     
     def extract(self, default=interfaces.NOVALUE):
@@ -106,14 +122,25 @@ class DatetimeWidget(DateWidget):
         if self.value == ('', '', '', '00', '00'):
             return ''
         formatter = self.request.locale.dates.getFormatter("dateTime", "short")
-        return formatter.format(datetime(*self.value))
+        datetime_value = datetime(*map(int, self.value))
+	if datetime_value.year > 1900:
+            return formatter.format(datetime_value)
+        # due to fantastic datetime.strftime we need this hack
+	# for now ctime is default
+	return datetime_value.ctime()
 
     @property
     def hour(self):
+        hour = self.request.get(self.name+'-hour', None)
+	if hour:
+	    return hour
         return self.value[3]
 
     @property
     def minute(self):
+        min = self.request.get(self.name+'-min', None)
+	if min:
+	    return min
         return self.value[4]
 
     def _padded_value(self, value):
