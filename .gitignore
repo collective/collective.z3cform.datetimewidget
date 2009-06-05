@@ -3,6 +3,7 @@
 bin/
 coverage/
 develop-eggs/
+dist/
 eggs/
 include/
 lib/

@@ -133,14 +133,14 @@ class DatetimeWidget(DateWidget):
     def hour(self):
         hour = self.request.get(self.name+'-hour', None)
 	if hour:
-	    return hour
+        return hour
         return self.value[3]
 
     @property
     def minute(self):
         min = self.request.get(self.name+'-min', None)
 	if min:
-	    return min
+        return min
         return self.value[4]
 
     def _padded_value(self, value):
