@@ -12,7 +12,7 @@ extracting a widget's value.)
 
 Let's set up a date field, date widget, and a converter adapting both of them.
   >>> from zope.schema import Date
-  >>> from collective.z3cform.datetimewidget.widget import DateWidget
+  >>> from collective.z3cform.datetimewidget import DateWidget
   >>> from collective.z3cform.datetimewidget.converter import DateDataConverter
   >>> from z3c.form.testing import TestRequest
   >>> field = Date()

@@ -52,7 +52,7 @@
             tal:repeat="item view/months"
             tal:attributes="value item/value;
                             selected python:item['selected'] and 'selected' or ''"
-            tal:content="item/content">label</option>
+            tal:content="item/name">label</option>
 </select> /
 <input type="text" id="" name="" class="" title="" lang="" disabled=""
        readonly="" alt="" tabindex="" accesskey="" size="4" maxlength="4"
@@ -162,3 +162,9 @@
 </select>
 <input name="field-empty-marker" type="hidden" value="1"
        tal:attributes="name string:${view/name}-empty-marker" />
+<a href="#" tal:condition="view/show_today_link"
+   tal:attributes="onclick string:return ${view/show_today_link_func}()">
+    Today
+</a>
+<script tal:condition="view/show_today_link" type="text/javascript"
+        tal:content="view/show_today_link_js" />

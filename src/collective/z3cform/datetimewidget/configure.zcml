@@ -6,44 +6,67 @@
 
     <include package="z3c.form" />
 
-    <class class=".widget.DateWidget">
+    <!-- WIDGETS -->
+
+    <!-- Date widget -->
+    <class class=".widget_date.DateWidget">
         <require permission="zope.Public"
                  interface=".interfaces.IDateWidget" />
     </class>
-    <class class=".widget.DatetimeWidget">
-        <require permission="zope.Public"
-                 interface=".interfaces.IDatetimeWidget" />
-    </class>
-
+    <!-- use Date by default -->
     <class class="zope.schema._field.Date">
         <implements interface=".interfaces.IDateField"/>
     </class>
+    <adapter
+        factory=".widget_date.DateFieldWidget"
+        for=".interfaces.IDateField
+             z3c.form.interfaces.IFormLayer" />
+
+    <!-- Datetime widget -->
+    <class class=".widget_datetime.DatetimeWidget">
+        <require permission="zope.Public"
+                 interface=".interfaces.IDatetimeWidget" />
+    </class>
+    <!-- use Datetime by default -->
     <class class="zope.schema._field.Datetime">
         <implements interface=".interfaces.IDatetimeField"/>
     </class>
     <adapter
-        factory=".widget.DateFieldWidget"
-        for=".interfaces.IDateField
-             z3c.form.interfaces.IFormLayer" />
-    <adapter
-        factory=".widget.DatetimeFieldWidget"
+        factory=".widget_datetime.DatetimeFieldWidget"
         for=".interfaces.IDatetimeField
              z3c.form.interfaces.IFormLayer" />
+
+    <!-- MonthYear widget -->
+    <class class=".widget_monthyear.MonthYearWidget">
+        <require permission="zope.Public"
+                 interface=".interfaces.IMonthYearWidget" />
+    </class>
+
+
+    <!-- CONVERTORS -->
 
     <adapter
         factory=".converter.DateDataConverter"
         for="zope.schema.interfaces.IDate
-             collective.z3cform.datetimewidget.interfaces.IDateWidget" />
+             .interfaces.IDateWidget" />
     <adapter
         factory=".converter.DatetimeDataConverter"
         for="zope.schema.interfaces.IDatetime
-             collective.z3cform.datetimewidget.interfaces.IDatetimeWidget" />
+             .interfaces.IDatetimeWidget" />
+    <adapter
+        factory=".converter.MonthYearDataConverter"
+        for="zope.schema.interfaces.IDate
+             .interfaces.IMonthYearWidget" />
 
+
+    <!-- TEMPLATES -->
+
+    <!-- Date widget -->
     <z3c:widgetTemplate
         mode="display"
  		widget=".interfaces.IDateWidget"        
  		layer="z3c.form.interfaces.IFormLayer"
- 		template="templates/date_display.pt" />
+ 		template="templates/display.pt" />
     <z3c:widgetTemplate
         mode="input"
  		widget=".interfaces.IDateWidget"        
@@ -53,12 +76,14 @@
         mode="hidden"
  		widget=".interfaces.IDateWidget"        
  		layer="z3c.form.interfaces.IFormLayer"
- 		template="templates/date_hidden.pt" />
+ 		template="templates/hidden.pt" />
+
+    <!-- Datetime widget -->
     <z3c:widgetTemplate
         mode="display"
  		widget=".interfaces.IDatetimeWidget"        
  		layer="z3c.form.interfaces.IFormLayer"
- 		template="templates/datetime_display.pt" />
+ 		template="templates/display.pt" />
     <z3c:widgetTemplate
         mode="input"
  		widget=".interfaces.IDatetimeWidget"        
@@ -68,6 +93,23 @@
         mode="hidden"
  		widget=".interfaces.IDatetimeWidget"        
  		layer="z3c.form.interfaces.IFormLayer"
- 		template="templates/datetime_hidden.pt" />
+ 		template="templates/hidden.pt" />
+
+    <!-- MonthYear widget -->
+    <z3c:widgetTemplate
+        mode="display"
+ 		widget=".interfaces.IMonthYearWidget"        
+ 		layer="z3c.form.interfaces.IFormLayer"
+ 		template="templates/display.pt" />
+    <z3c:widgetTemplate
+        mode="input"
+ 		widget=".interfaces.IMonthYearWidget"        
+ 		layer="z3c.form.interfaces.IFormLayer"
+ 		template="templates/monthyear_input.pt" />
+    <z3c:widgetTemplate
+        mode="hidden"
+ 		widget=".interfaces.IMonthYearWidget"        
+ 		layer="z3c.form.interfaces.IFormLayer"
+ 		template="templates/hidden.pt" />
 
 </configure>

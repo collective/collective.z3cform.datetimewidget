@@ -1,6 +1,15 @@
 Changelog
 =========
 
+0.1a7 (2009-09-04)
+------------------
+
+ * MonthYearWidget added [garbas]
+ * spliting widget.py script into script for each widget [garbas]
+ * only using one hidden/display template [garbas]
+ * show_today_link widget option which is inserting current date into fields
+   using plain javascript
+
 0.1a6 (2009-06-05)
 ------------------
 
@@ -19,20 +28,20 @@ Changelog
 0.1a3 (2009-06-05)
 ------------------
 
-* widget was not showing values from request [garbas]
-* ISSUE 1: SOLVED [garbas]
-  After some testing I have seen that some validations are missing, therefore
-  I get an error when adding values like '99' into the year field:
-  "ValueError: year=99 is before 1900; the datetime strftime() methods require
-  year >= 1900"
+ * widget was not showing values from request [garbas]
+ * ISSUE 1: SOLVED [garbas]
+   After some testing I have seen that some validations are missing, therefore
+   I get an error when adding values like '99' into the year field:
+   "ValueError: year=99 is before 1900; the datetime strftime() methods require
+   year >= 1900"
 
 
 0.1a2 (2009-05-28)
 ------------------
 
-* Register the widgets for custom interfaces that we apply to the standard
-  datetime fields, to work around a problem with ZCML conflicting with
-  z3c.form. [davisagli]
+ * Register the widgets for custom interfaces that we apply to the standard
+   datetime fields, to work around a problem with ZCML conflicting with
+   z3c.form. [davisagli]
 
 0.1a1 (2009-05-11)
 ------------------

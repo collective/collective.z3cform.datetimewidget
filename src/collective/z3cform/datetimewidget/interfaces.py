@@ -2,7 +2,7 @@
 
 #############################################################################
 #                                                                           #
-#   Copyright (c) 2008 Rok Garbas <rok.garbas@gmail.com>                    #
+#   Copyright (c) 2008 Rok Garbas <rok@garbas.si>                           #
 #                                                                           #
 # This program is free software; you can redistribute it and/or modify      #
 # it under the terms of the GNU General Public License as published by      #
@@ -20,25 +20,34 @@
 #############################################################################
 __docformat__ = "reStructuredText"
 
-from z3c.form.interfaces import IWidget
-from zope.schema import interfaces
-from zope.schema import ValidationError
-from collective.z3cform.datetimewidget.i18n import MessageFactory as _
 
-class IDateField(interfaces.IDate):
+import z3c.form
+import z3c.form.interfaces
+import zope.schema
+
+from i18n import MessageFactory as _
+
+
+class IDateField(zope.schema.interfaces.IDate):
     """ Special marker for date fields that use our widget """
 
-class IDatetimeField(interfaces.IDatetime):
+class IDatetimeField(zope.schema.interfaces.IDatetime):
     """ Special marker for datetime fields that use our widget """
 
-class IDateWidget(IWidget):
+
+class IDateWidget(z3c.form.interfaces.IWidget):
     """ Date widget marker for z3c.form """
 
-class IDatetimeWidget(IWidget):
+class IDatetimeWidget(z3c.form.interfaces.IWidget):
     """ Datetime widget marker for z3c.form """
 
-class DateValidationError(ValidationError):
+class IMonthYearWidget(z3c.form.interfaces.IWidget):
+    """ MonthYear widget marker for z3c.form """
+
+
+class DateValidationError(zope.schema.ValidationError):
     __doc__ = _(u'Please enter a valid date.')
 
-class DatetimeValidationError(ValidationError):
+class DatetimeValidationError(zope.schema.ValidationError):
     __doc__ = _(u'Please enter a valid date and time.')
+

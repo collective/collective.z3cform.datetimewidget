@@ -1,4 +1,4 @@
-<input type="text" id="" name="" class="" title="" lang="" disabled=""
+<input type="hidden" id="" name="" class="" title="" lang="" disabled=""
        readonly="" alt="" tabindex="" accesskey="" size="2" maxlength="2"
        tal:attributes="id string:${view/id}-day;
                        name string:${view/name}-day;
@@ -25,7 +25,7 @@
                        readonly view/readonly;
                        alt view/alt;
                        accesskey view/accesskey;
-                       onselect view/onselect;" /> /
+                       onselect view/onselect;" />
 <select id="" name="" class="" tabindex="" disabled=""
         tal:attributes="id string:${view/id}-month;
                         name string:${view/name}-month;
@@ -83,4 +83,4 @@
 <input name="field-empty-marker" type="hidden" value="1"
        tal:attributes="name string:${view/name}-empty-marker" />
 <a tal:condition="view/show_today_link"
-   tal:replace="structure view/show_today_link_js" />
+   tal:replace="structure view/show_today_link" />

@@ -2,7 +2,7 @@
 
 #############################################################################
 #                                                                           #
-#   Copyright (c) 2008 Rok Garbas <rok.garbas@gmail.com>                    #
+#   Copyright (c) 2008 Rok Garbas <rok@garbas.si>                           #
 #                                                                           #
 # This program is free software; you can redistribute it and/or modify      #
 # it under the terms of the GNU General Public License as published by      #
@@ -65,3 +65,11 @@ class DatetimeDataConverter(DateDataConverter):
             return datetime(*value)
         except ValueError:
             raise DatetimeValidationError
+
+class MonthYearDataConverter(DateDataConverter):
+    
+    def toWidgetValue(self, value):
+        if value is self.field.missing_value:
+            return ('', '', '1')
+        return (value.year, value.month, value.day)
+

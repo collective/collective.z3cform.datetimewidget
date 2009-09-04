@@ -2,7 +2,7 @@
 
 #############################################################################
 #                                                                           #
-#   Copyright (c) 2008 Rok Garbas <rok.garbas@gmail.com>                    #
+#   Copyright (c) 2008 Rok Garbas <rok@garbas.si>                           #
 #                                                                           #
 # This program is free software; you can redistribute it and/or modify      #
 # it under the terms of the GNU General Public License as published by      #
@@ -33,23 +33,40 @@ def tearDown(test):
 
 def test_suite():
     return unittest.TestSuite((
-        doctest.DocFileSuite('widget.txt',
+        doctest.DocFileSuite('widget_date.txt',
             setUp=setUp, tearDown=tearDown,
             optionflags=doctest.REPORT_ONLY_FIRST_FAILURE |
                         doctest.NORMALIZE_WHITESPACE |
-                        doctest.ELLIPSIS,
+                        doctest.ELLIPSIS |
+                        doctest.REPORT_UDIFF,
+            ),
+        doctest.DocFileSuite('widget_datetime.txt',
+            setUp=setUp, tearDown=tearDown,
+            optionflags=doctest.REPORT_ONLY_FIRST_FAILURE |
+                        doctest.NORMALIZE_WHITESPACE |
+                        doctest.ELLIPSIS |
+                        doctest.REPORT_UDIFF,
+            ),
+        doctest.DocFileSuite('widget_monthyear.txt',
+            setUp=setUp, tearDown=tearDown,
+            optionflags=doctest.REPORT_ONLY_FIRST_FAILURE |
+                        doctest.NORMALIZE_WHITESPACE |
+                        doctest.ELLIPSIS |
+                        doctest.REPORT_UDIFF,
             ),
         doctest.DocFileSuite('converter.txt',
             setUp=setUp, tearDown=tearDown,
             optionflags=doctest.REPORT_ONLY_FIRST_FAILURE |
                         doctest.NORMALIZE_WHITESPACE |
-                        doctest.ELLIPSIS,
+                        doctest.ELLIPSIS |
+                        doctest.REPORT_UDIFF,
             ),
         doctest.DocFileSuite('issues.txt',
             setUp=testing.setUp, tearDown=testing.tearDown,
             optionflags=doctest.REPORT_ONLY_FIRST_FAILURE |
                         doctest.NORMALIZE_WHITESPACE |
-                        doctest.ELLIPSIS,
+                        doctest.ELLIPSIS |
+                        doctest.REPORT_UDIFF,
             ),
         ))
 

@@ -1,0 +1,66 @@
+=========
+MonthYear
+=========
+
+Let's setup all required adapters using zcml. This makes sure we test the real
+configuration.
+
+  >>> import datetime
+  >>> import z3c.form
+  >>> import zope.schema
+  >>> import zope.component
+  >>> import zope.app.component
+  >>> import collective.z3cform.datetimewidget
+  >>> from zope.configuration import xmlconfig
+  >>> xmlconfig.XMLConfig('meta.zcml', zope.component)()
+  >>> xmlconfig.XMLConfig('meta.zcml', zope.app.component)()
+  >>> xmlconfig.XMLConfig('configure.zcml', zope.i18n)()
+  >>> xmlconfig.XMLConfig('meta.zcml', zope.i18n)()
+  >>> xmlconfig.XMLConfig('meta.zcml', z3c.form)()
+  >>> xmlconfig.XMLConfig('configure.zcml', collective.z3cform.datetimewidget)()
+
+  >>> from z3c.form import interfaces
+  >>> from z3c.form.testing import TestRequest
+  >>> request = TestRequest(HTTP_ACCEPT_LANGUAGE = 'en')
+  >>> field = zope.schema.Date(default=datetime.date(2007, 4, 1))
+  >>> widget = collective.z3cform.datetimewidget.MonthYearFieldWidget(field, request)
+  >>> widget.id = 'foo'
+  >>> widget.name = 'bar'
+
+now lets test the widget
+
+  >>> widget.update()
+  >>> print widget.render()
+  <input type="hidden" id="foo-day" name="bar-day"
+         class="monthyear-widget required date-field" size="2"
+         maxlength="2" value="1" />
+  <select id="foo-month" name="bar-month"
+          class="monthyear-widget required date-field">
+      <option value="1">January</option>
+      <option value="2">February</option>
+      <option value="3">March</option>
+      <option value="4" selected="selected">April</option>
+      <option value="5">May</option>
+      <option value="6">June</option>
+      <option value="7">July</option>
+      <option value="8">August</option>
+      <option value="9">September</option>
+      <option value="10">October</option>
+      <option value="11">November</option>
+      <option value="12">December</option>
+  </select> /
+  <input type="text" id="foo-year" name="bar-year"
+         class="monthyear-widget required date-field" alt=""
+         accesskey="" size="4" maxlength="4" value="2007" />
+  <input name="bar-empty-marker" type="hidden" value="1" />
+
+  >>> widget.mode = interfaces.DISPLAY_MODE
+  >>> print widget.render()
+  <span id="foo" class="monthyear-widget required date-field">4/1/07</span>
+
+  >>> widget.mode = interfaces.HIDDEN_MODE
+  >>> print widget.render()
+  <input type="hidden" id="foo" name="bar"
+           class="hidden-widget" value="4/1/07" />
+
+

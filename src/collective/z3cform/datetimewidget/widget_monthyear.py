@@ -20,7 +20,27 @@
 #############################################################################
 __docformat__ = "reStructuredText"
 
-from widget_date import DateWidget, DateFieldWidget
-from widget_datetime import DatetimeWidget, DatetimeFieldWidget
-from widget_monthyear import MonthYearWidget, MonthYearFieldWidget
+import z3c.form
+import zope.schema
+import zope.interface
+import zope.component
+from widget_date import DateWidget
+from interfaces import IMonthYearWidget
+
+
+class MonthYearWidget(DateWidget):
+    """ Month and year widget """
+
+    zope.interface.implementsOnly(IMonthYearWidget)
+
+    klass = u'monthyear-widget'
+    value = ('', '', 1)
+
+@zope.component.adapter(zope.schema.interfaces.IField, z3c.form.interfaces.IFormLayer)
+@zope.interface.implementer(z3c.form.interfaces.IFieldWidget)
+def MonthYearFieldWidget(field, request):
+    """IFieldWidget factory for MonthYearWidget."""
+    return z3c.form.widget.FieldWidget(field, MonthYearWidget(request))
+
+
 

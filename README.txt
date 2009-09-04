@@ -12,10 +12,18 @@ Improved datetime widgets for z3c.form
 .. _Date Input Diversity: http://www.cornae.org/articles/date-input-diversity
 
 
+The ``collective.z3cform.datetimewidget`` library provides a form framework
+and widgets. This document ensures that we implement a widget for Date and
+Datetime field defined in ``zope.schema``. Take a look at the different widget 
+doctest files for more information about the widgets.
+
+
 TODO
 ====
 
+ * documentation with sphinxbuilder
  * create DateDeltaWidget and DatetimeDeltaWidget
+
 
 Contributors
 ============

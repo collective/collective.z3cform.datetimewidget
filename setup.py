@@ -25,8 +25,12 @@ setup(name='collective.z3cform.datetimewidget',
           'setuptools',
           # -*- Extra requirements: -*-
           'z3c.form',
+          'zope.deprecation'
       ],
-      extras_require=dict(test=['z3c.form','zope.testing', 'zc.buildout']),
+      extras_require=dict(test=[
+            'z3c.form[test]',
+            'zope.testing',
+            'zc.buildout']),
       entry_points="""
       # -*- Entry points: -*-
       """,
