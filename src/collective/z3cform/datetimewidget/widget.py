@@ -38,7 +38,7 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
 
     klass = u'date-widget'
     value = ('', '', '')
-    
+    show_today_link = False
     
     def update(self):
         super(DateWidget, self).update()
