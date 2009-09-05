@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.1a8 (2009-09-04)
+------------------
+
+ * provide english, german, slovenian, spanish, portugal, croatian,
+   serbian(latin&cyrilic) translations [garbas]
+
 0.1a7 (2009-09-04)
 ------------------
 

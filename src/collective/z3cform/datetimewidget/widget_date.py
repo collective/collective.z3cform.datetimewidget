@@ -20,6 +20,7 @@
 #############################################################################
 
 
+import zope.i18n
 import zope.schema
 import zope.interface
 import zope.component
@@ -39,7 +40,6 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
 
     klass = u'date-widget'
     show_today_link = False
-    no_value = _(u"Select month")
     value = ('', '', '')
 
     def update(self):
@@ -107,7 +107,7 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
         for i in ['-', '_']:
             show_link_func = show_link_func.replace(i, '')
         return '''
-            <a href="#" onclick="return %(show_link_func)s()">Today</a>
+            <a href="#" onclick="return %(show_link_func)s()">%(today)s</a>
             <script type="text/javascript">
                 var %(show_link_func)s = function() {
                     document.getElementById('%(id)s-day').value = %(day)s;
@@ -116,7 +116,8 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
                     return false;
                 }</script>''' % dict(
                     id = self.id, show_link_func = show_link_func,
-                    day = now.day, month = now.month, year = now.year)
+                    day = now.day, month = now.month, year = now.year,
+                    today = zope.i18n.translate(_(u"Today"), context=self.request))
 
 
 @zope.component.adapter(zope.schema.interfaces.IField, z3c.form.interfaces.IFormLayer)

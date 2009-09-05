@@ -24,8 +24,8 @@ also define a helper method for test the widgets:
 
   >>> from z3c.form import interfaces
   >>> from z3c.form.testing import TestRequest
-  >>> def setupWidget(field):
-  ...     request = TestRequest(HTTP_ACCEPT_LANGUAGE = 'en')
+  >>> def setupWidget(field, lang="en"):
+  ...     request = TestRequest(HTTP_ACCEPT_LANGUAGE = lang)
   ...     widget = zope.component.getMultiAdapter((field, request),
   ...         interfaces.IFieldWidget)
   ...     widget.id = 'foo'
@@ -102,10 +102,34 @@ inserting current date into the fields.
               <a href="#" onclick="return fooshowtodaylink()">Today</a>
               <script type="text/javascript">
                   var fooshowtodaylink = function() {
-                      document.getElementById('foo-day').value = 4;
-                      document.getElementById('foo-month').value = 9;
-                      document.getElementById('foo-year').value = 2009;
+                      document.getElementById('foo-day').value = ...;
+                      document.getElementById('foo-month').value = ...;
+                      document.getElementById('foo-year').value = ...;
                       return false;
                   }</script>
   <BLANKLINE>
+
+check if translations are working
+
+  >>> widget = setupWidget(field, 'sl')
+  >>> widget.update()
+  >>> widget.show_today_link = True
+  >>> print widget.render()
+  <input...
+  ...
+      <option value="1">januar</option>
+      <option value="2">februar</option>
+      <option value="3">marec</option>
+      <option value="4" selected="selected">april</option>
+      <option value="5">maj</option>
+      <option value="6">junij</option>
+      <option value="7">julij</option>
+      <option value="8">avgust</option>
+      <option value="9">september</option>
+      <option value="10">oktober</option>
+      <option value="11">november</option>
+      <option value="12">december</option>
+  ...
+              <a href="#" onclick="return fooshowtodaylink()">Danes</a>
+  ...
 

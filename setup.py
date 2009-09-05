@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-version = '0.1a7'
+version = '0.1a8'
 
 setup(name='collective.z3cform.datetimewidget',
       version=version,
@@ -24,6 +24,7 @@ setup(name='collective.z3cform.datetimewidget',
       install_requires=[
           'setuptools',
           # -*- Extra requirements: -*-
+          'zope.i18n',
           'z3c.form',
           'zope.deprecation'
       ],
