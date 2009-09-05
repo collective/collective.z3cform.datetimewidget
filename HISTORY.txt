@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.1a9 (unreleased)
+------------------
+
+ * provide french translation [vincentfretin]
+
 0.1a8 (2009-09-04)
 ------------------
 
