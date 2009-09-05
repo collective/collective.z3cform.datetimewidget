@@ -22,7 +22,7 @@ __docformat__ = "reStructuredText"
 
 
 DOMAIN = 'collective.z3cform.datetimewidget'
-LANGUAGES= ['hr', 'sl', 'sr', 'sr_Latn', 'en', 'es', 'pt', 'de']
+LANGUAGES= ['hr', 'sl', 'sr', 'sr_Latn', 'en', 'es', 'pt', 'de', 'fr']
 
 try:
     import zope.i18nmessageid
