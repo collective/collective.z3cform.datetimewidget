@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.z3cform.datetimewidget\n"
-"POT-Creation-Date: 2009-09-05 02:38+0000\n"
+"POT-Creation-Date: 2009-09-07 12:17+0000\n"
 "PO-Revision-Date: 2009-09-05 10:43+0200\n"
 "Last-Translator: Vincent Fretin <vincent.fretin@gmail.com>\n"
 "Language-Team: French\n"
@@ -28,3 +28,4 @@ msgstr "Veuillez saisir une date valide."
 #: collective/z3cform/datetimewidget/widget_date.py:120
 msgid "Today"
 msgstr "Aujourd'hui"
+
