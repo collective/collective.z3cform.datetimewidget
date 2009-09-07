@@ -4,7 +4,7 @@ version = '0.1a9'
 
 setup(name='collective.z3cform.datetimewidget',
       version=version,
-      description="z3c.form date and datetime widgets)",
+      description="z3c.form date and datetime widgets",
       long_description=open("README.txt").read()+"\n"+open("HISTORY.txt").read(),
       # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[

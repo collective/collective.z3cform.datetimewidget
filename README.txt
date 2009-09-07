@@ -28,6 +28,6 @@ TODO
 Contributors
 ============
 
+ * Vincent Fretin - vincentfretin
  * David Glick - davisagli
  * Rok Garbas - garbas
-
