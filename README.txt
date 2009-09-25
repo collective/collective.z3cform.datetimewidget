@@ -21,7 +21,6 @@ doctest files for more information about the widgets.
 TODO
 ====
 
- * documentation with sphinxbuilder
  * create DateDeltaWidget and DatetimeDeltaWidget
 
 

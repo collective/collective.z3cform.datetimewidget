@@ -4,6 +4,7 @@ bin/
 coverage/
 develop-eggs/
 dist/
+docs/
 eggs/
 include/
 lib/
