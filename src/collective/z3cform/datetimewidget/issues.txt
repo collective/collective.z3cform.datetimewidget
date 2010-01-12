@@ -56,32 +56,12 @@ ISSUE 1
 
   >>> test_form.mode = interfaces.DISPLAY_MODE
   >>> test_form.update()
-  >>> print test_form.render()
-  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-  <html xmlns="http://www.w3.org/1999/xhtml">
-    <body>
-      <i>No changes were applied.</i>
-  <BLANKLINE>
-      <form action=".">
-        <div class="row">
-          <label for="form-widgets-date">Date</label>
-          <span id="form-widgets-date"
-        class="date-widget required date-field">Sat Feb 14 00:00:00 0099</span>
+  >>> print test_form.render() #doctest:
+  <...
+  <div class="row">
+     <label for="form-widgets-datetime">Datetime</label>
+     <span id="form-widgets-datetime"
+       class="datetime-widget required datetime-field">Thu Oct  1 06:35:00 0099</span>
   </div>
-        <div class="row">
-          <label for="form-widgets-datetime">Datetime</label>
-          <span id="form-widgets-datetime"
-	class="datetime-widget required datetime-field">Thu Oct  1 06:35:00 0099</span>
-  </div>
-        <div class="action">
-  <BLANKLINE>
-  <input id="form-buttons-apply" name="form.buttons.apply"
-         class="submit-widget button-field" value="Apply"
-         type="submit" />
-  <BLANKLINE>
-  </div>
-      </form>
-    </body>
-  </html>
-  <BLANKLINE>
+  ... <input ... id="form-buttons-apply" ...
 
