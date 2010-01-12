@@ -23,48 +23,53 @@ __docformat__ = "reStructuredText"
 import unittest
 from zope.app.testing import setup
 from zope.testing import doctest
-from z3c.form import testing
+from z3c.form.testing import TestRequest
+from z3c.form.interfaces import IFieldWidget, DISPLAY_MODE
+from z3c.form import interfaces
+
+from Testing import ZopeTestCase as ztc
+import datetime
+from StringIO import StringIO
+import z3c.form
+import zope.schema
+import zope.component
+import zope.app.component
+import collective.z3cform.datetimewidget
+from zope.configuration import xmlconfig
 
 
-def setUp(test):
-    test.globs = {'root': setup.placefulSetUp(True)}
+class WidgetTestCase(object):
 
-def tearDown(test):
-    setup.placefulTearDown()
+    def setUp(self):
+        self.root = setup.placefulSetUp(True)
+        xmlconfig.XMLConfig('meta.zcml', zope.component)()
+        xmlconfig.XMLConfig('meta.zcml', zope.app.component)()
+        xmlconfig.XMLConfig('configure.zcml', zope.i18n)()
+        xmlconfig.XMLConfig('meta.zcml', zope.i18n)()
+        xmlconfig.XMLConfig('meta.zcml', z3c.form)()
+        xmlconfig.XMLConfig('configure.zcml', collective.z3cform.datetimewidget)()
+
+    def tearDown(test):
+        setup.placefulTearDown()
+
+    def setupWidget(self, field, lang="en"):
+        request = TestRequest(HTTP_ACCEPT_LANGUAGE=lang)
+        widget = zope.component.getMultiAdapter((field, request),
+                                                IFieldWidget)
+        widget.id = 'foo'
+        widget.name = 'bar'
+        return widget
 
 
 def test_suite():
     return unittest.TestSuite((
-        doctest.DocFileSuite('widget_date.txt',
-            setUp=setUp, tearDown=tearDown,
-            optionflags=doctest.REPORT_ONLY_FIRST_FAILURE |
-                        doctest.NORMALIZE_WHITESPACE |
-                        doctest.ELLIPSIS |
-                        doctest.REPORT_UDIFF,
-            ),
-        doctest.DocFileSuite('widget_datetime.txt',
-            setUp=setUp, tearDown=tearDown,
-            optionflags=doctest.REPORT_ONLY_FIRST_FAILURE |
-                        doctest.NORMALIZE_WHITESPACE |
-                        doctest.ELLIPSIS |
-                        doctest.REPORT_UDIFF,
-            ),
-        doctest.DocFileSuite('widget_monthyear.txt',
-            setUp=setUp, tearDown=tearDown,
-            optionflags=doctest.REPORT_ONLY_FIRST_FAILURE |
-                        doctest.NORMALIZE_WHITESPACE |
-                        doctest.ELLIPSIS |
-                        doctest.REPORT_UDIFF,
-            ),
-        doctest.DocFileSuite('converter.txt',
-            setUp=setUp, tearDown=tearDown,
-            optionflags=doctest.REPORT_ONLY_FIRST_FAILURE |
-                        doctest.NORMALIZE_WHITESPACE |
-                        doctest.ELLIPSIS |
-                        doctest.REPORT_UDIFF,
-            ),
-        doctest.DocFileSuite('issues.txt',
-            setUp=testing.setUp, tearDown=testing.tearDown,
+        ztc.ZopeDocFileSuite(
+            'widget_date.txt',
+            'widget_datetime.txt',
+            'widget_monthyear.txt',
+            'converter.txt',
+            'issues.txt',
+            test_class=WidgetTestCase,
             optionflags=doctest.REPORT_ONLY_FIRST_FAILURE |
                         doctest.NORMALIZE_WHITESPACE |
                         doctest.ELLIPSIS |

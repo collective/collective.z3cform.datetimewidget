@@ -2,40 +2,15 @@
 Date
 ====
 
-Let's setup all required adapters using zcml. This makes sure we test the real
-configuration.
+All necessary components are set up in the testclass to make sure that
+we test the real configuration. Let's test the Widget:
 
   >>> import datetime
   >>> import z3c.form
-  >>> import zope.i18n
   >>> import zope.schema
-  >>> import zope.component
-  >>> import zope.app.component
-  >>> import collective.z3cform.datetimewidget
-  >>> from zope.configuration import xmlconfig
-  >>> xmlconfig.XMLConfig('meta.zcml', zope.component)()
-  >>> xmlconfig.XMLConfig('meta.zcml', zope.app.component)()
-  >>> xmlconfig.XMLConfig('configure.zcml', zope.i18n)()
-  >>> xmlconfig.XMLConfig('meta.zcml', zope.i18n)()
-  >>> xmlconfig.XMLConfig('meta.zcml', z3c.form)()
-  >>> xmlconfig.XMLConfig('configure.zcml', collective.z3cform.datetimewidget)()
-
-also define a helper method for test the widgets:
-
-  >>> from z3c.form import interfaces
-  >>> from z3c.form.testing import TestRequest
-  >>> def setupWidget(field, lang="en"):
-  ...     request = TestRequest(HTTP_ACCEPT_LANGUAGE = lang)
-  ...     widget = zope.component.getMultiAdapter((field, request),
-  ...         interfaces.IFieldWidget)
-  ...     widget.id = 'foo'
-  ...     widget.name = 'bar'
-  ...     return widget
-
-now lets test the widget
-
+  
   >>> field = zope.schema.Date(default=datetime.date(2007, 4, 1))
-  >>> widget = setupWidget(field)
+  >>> widget = self.setupWidget(field)
   >>> widget.update()
   >>> print widget.render()
   <input type="text" id="foo-day" name="bar-day"
@@ -61,11 +36,11 @@ now lets test the widget
          accesskey="" size="4" maxlength="4" value="2007" />
   <input name="bar-empty-marker" type="hidden" value="1" />
 
-  >>> widget.mode = interfaces.DISPLAY_MODE
+  >>> widget.mode = z3c.form.interfaces.DISPLAY_MODE
   >>> print widget.render()
   <span id="foo" class="date-widget required date-field">4/1/07</span>
 
-  >>> widget.mode = interfaces.HIDDEN_MODE
+  >>> widget.mode = z3c.form.interfaces.HIDDEN_MODE
   >>> print widget.render()
   <input type="hidden" id="foo" name="bar"
            class="hidden-widget" value="4/1/07" />
@@ -73,7 +48,7 @@ now lets test the widget
 now lets enable show_today_link option to provide plain javascript for
 inserting current date into the fields.
 
-  >>> widget.mode = interfaces.INPUT_MODE
+  >>> widget.mode = z3c.form.interfaces.INPUT_MODE
   >>> widget.show_today_link = True
   >>> print widget.render()
   <input type="text" id="foo-day" name="bar-day"
@@ -111,7 +86,7 @@ inserting current date into the fields.
 
 check if translations are working
 
-  >>> widget = setupWidget(field, 'sl')
+  >>> widget = self.setupWidget(field, 'sl')
   >>> widget.update()
   >>> widget.show_today_link = True
   >>> print widget.render()

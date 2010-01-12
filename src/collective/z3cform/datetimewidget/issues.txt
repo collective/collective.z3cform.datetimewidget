@@ -2,21 +2,13 @@
 Fixed Bugs (test)
 =================
 
-Let's setup all required adapters using zcml. This makes sure we test the real
-configuration.
+All necessary components are set up in the testclass to make sure that
+we test the real configuration. Let's test the Widget:
 
-  >>> from zope.configuration import xmlconfig
-  >>> import zope.component
-  >>> import zope.app.component
+  >>> import datetime
   >>> import z3c.form
-  >>> import collective.z3cform.datetimewidget
-  >>> xmlconfig.XMLConfig('meta.zcml', zope.component)()
-  >>> xmlconfig.XMLConfig('meta.zcml', zope.app.component)()
-  >>> xmlconfig.XMLConfig('configure.zcml', zope.i18n)()
-  >>> xmlconfig.XMLConfig('meta.zcml', zope.i18n)()
-  >>> xmlconfig.XMLConfig('meta.zcml', z3c.form)()
-  >>> xmlconfig.XMLConfig('configure.zcml', collective.z3cform.datetimewidget)()
-
+  >>> import zope.schema
+  
 
 ISSUE 1
 -------
@@ -31,7 +23,6 @@ ISSUE 1
  year >= 1900"
 
   >>> import zope.interface
-  >>> import zope.schema
   >>> class ITest(zope.interface.Interface):
   ...     date = zope.schema.Date(title=u'Date',required=True)
   ...     datetime = zope.schema.Datetime(title=u'Datetime', required=True)
@@ -51,7 +42,7 @@ ISSUE 1
   ...                 'form.widgets.datetime-hour': u'6',
   ...                 'form.widgets.datetime-min': u'35',
   ...                 'form.buttons.apply': u'Apply'})
-  >>> test_form = TestForm(root, request)
+  >>> test_form = TestForm(self.root, request)
 
   >>> from zope.app.pagetemplate import viewpagetemplatefile
   >>> from z3c.form import tests
@@ -61,7 +52,7 @@ ISSUE 1
   ...             'simple_edit.pt', os.path.dirname(tests.__file__)), test_form)
 
   >>> from zope.interface import alsoProvides
-  >>> alsoProvides(root, ITest)
+  >>> alsoProvides(self.root, ITest)
 
   >>> test_form.mode = interfaces.DISPLAY_MODE
   >>> test_form.update()

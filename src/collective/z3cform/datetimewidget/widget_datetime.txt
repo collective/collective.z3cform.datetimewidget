@@ -3,39 +3,14 @@ Datetime
 ========
 
 Let's setup all required adapters using zcml. This makes sure we test the real
-configuration.
+configuration. Let's test the widget:
 
   >>> import datetime
   >>> import z3c.form
   >>> import zope.schema
-  >>> import zope.component
-  >>> import zope.app.component
-  >>> import collective.z3cform.datetimewidget
-  >>> from zope.configuration import xmlconfig
-  >>> xmlconfig.XMLConfig('meta.zcml', zope.component)()
-  >>> xmlconfig.XMLConfig('meta.zcml', zope.app.component)()
-  >>> xmlconfig.XMLConfig('configure.zcml', zope.i18n)()
-  >>> xmlconfig.XMLConfig('meta.zcml', zope.i18n)()
-  >>> xmlconfig.XMLConfig('meta.zcml', z3c.form)()
-  >>> xmlconfig.XMLConfig('configure.zcml', collective.z3cform.datetimewidget)()
-
-also define a helper method for test the widgets:
-
-  >>> from z3c.form import interfaces
-  >>> from z3c.form.testing import TestRequest
-  >>> from zope.i18n.locales import locales
-  >>> def setupWidget(field):
-  ...     request = TestRequest(HTTP_ACCEPT_LANGUAGE = 'en')
-  ...     widget = zope.component.getMultiAdapter((field, request),
-  ...         interfaces.IFieldWidget)
-  ...     widget.id = 'foo'
-  ...     widget.name = 'bar'
-  ...     return widget
-
-now lets test the widget
 
   >>> field = zope.schema.Datetime(default=datetime.datetime(2007, 4, 1, 12))
-  >>> widget = setupWidget(field)
+  >>> widget = self.setupWidget(field)
   >>> widget.update()
   >>> print widget.render()
   <input type="text" id="foo-day" name="bar-day"
@@ -105,18 +80,18 @@ now lets test the widget
     </select>
     <input name="bar-empty-marker" type="hidden" value="1" />
 
-  >>> widget.mode = interfaces.DISPLAY_MODE
+  >>> widget.mode = z3c.form.interfaces.DISPLAY_MODE
   >>> print widget.render()
   <span id="foo"
         class="datetime-widget required datetime-field">4/1/07 12:00 PM</span>
 
-  >>> widget.mode = interfaces.HIDDEN_MODE
+  >>> widget.mode = z3c.form.interfaces.HIDDEN_MODE
   >>> print widget.render()
   <input type="hidden" id="foo" name="bar"
            class="hidden-widget" value="4/1/07 12:00 PM" />
 
   >>> field = zope.schema.Datetime(default=datetime.datetime(2007, 4, 1, 13))
-  >>> widget = setupWidget(field)
+  >>> widget = self.setupWidget(field)
   >>> widget.ampm = True
   >>> widget.update()
   >>> print widget.render()
@@ -155,12 +130,12 @@ now lets test the widget
     </select>
     <input name="bar-empty-marker" type="hidden" value="1" />
 
-  >>> widget.mode = interfaces.DISPLAY_MODE
+  >>> widget.mode = z3c.form.interfaces.DISPLAY_MODE
   >>> print widget.render()
   <span id="foo"
         class="datetime-widget required datetime-field">4/1/07 1:00 PM</span>
 
-  >>> widget.mode = interfaces.HIDDEN_MODE
+  >>> widget.mode = z3c.form.interfaces.HIDDEN_MODE
   >>> print widget.render()
   <input type="hidden" id="foo" name="bar"
            class="hidden-widget" value="4/1/07 1:00 PM" />
