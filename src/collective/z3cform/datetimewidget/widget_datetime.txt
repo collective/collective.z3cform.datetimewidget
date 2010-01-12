@@ -73,7 +73,7 @@ configuration. Let's test the widget:
     <input type="text" id="foo-min" name="bar-min"
            class="datetime-widget required datetime-field"
            alt="" accesskey="" size="2" maxlength="2" value="00" />
-    <select id="foo-month" name="bar-month"
+    <select id="foo-ampm" name="bar-ampm"
             class="datetime-widget required datetime-field">
         <option value="AM">AM</option>
         <option value="PM" selected="selected">PM</option>
@@ -123,12 +123,25 @@ configuration. Let's test the widget:
     <input type="text" id="foo-min" name="bar-min"
            class="datetime-widget required datetime-field"
            alt="" accesskey="" size="2" maxlength="2" value="00" />
-    <select id="foo-month" name="bar-month"
+    <select id="foo-ampm" name="bar-ampm"
             class="datetime-widget required datetime-field">
         <option value="AM">AM</option>
         <option value="PM" selected="selected">PM</option>
     </select>
     <input name="bar-empty-marker" type="hidden" value="1" />
+  >>> widget.extract() is z3c.form.interfaces.NOVALUE
+  True
+  >>> widget.request.form['bar-day'] = '1'
+  >>> widget.request.form['bar-month'] = '4'
+  >>> widget.request.form['bar-year'] = '2007'
+  >>> widget.request.form['bar-hour'] = '10'
+  >>> widget.request.form['bar-min'] = '30'
+  >>> widget.request.form['bar-ampm'] = 'AM'
+  >>> widget.extract()
+  ('2007', '4', '1', '10', '30')
+  >>> widget.request.form['bar-ampm'] = 'PM'
+  >>> widget.extract()
+  ('2007', '4', '1', '22', '30') 
 
   >>> widget.mode = z3c.form.interfaces.DISPLAY_MODE
   >>> print widget.render()
@@ -139,4 +152,3 @@ configuration. Let's test the widget:
   >>> print widget.render()
   <input type="hidden" id="foo" name="bar"
            class="hidden-widget" value="4/1/07 1:00 PM" />
-

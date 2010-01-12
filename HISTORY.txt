@@ -1,6 +1,11 @@
 Changelog
 =========
 
+0.1a10 (svn/unreleased)
+-----------------------
+
+ * fix handling of AM/PM in DateTimeWidget and add test [csenger]
+
 0.1a9 (2009-09-07)
 ------------------
 
