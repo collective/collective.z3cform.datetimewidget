@@ -44,7 +44,19 @@ class WidgetTestCase(object):
         self.root = setup.placefulSetUp(True)
         xmlconfig.XMLConfig('meta.zcml', zope.component)()
         xmlconfig.XMLConfig('meta.zcml', zope.app.component)()
-        xmlconfig.XMLConfig('configure.zcml', zope.i18n)()
+        try:
+            xmlconfig.XMLConfig('configure.zcml', zope.i18n)()
+        except IOError:
+            # Zope 2.10
+            xmlconfig.xmlconfig(StringIO('''
+            <configure xmlns="http://namespaces.zope.org/zope">
+               <utility
+                  provides="zope.i18n.interfaces.INegotiator"
+                  component="zope.i18n.negotiator.negotiator" />
+
+               <include package="zope.i18n.locales" />
+            </configure>
+             '''))
         xmlconfig.XMLConfig('meta.zcml', zope.i18n)()
         xmlconfig.XMLConfig('meta.zcml', z3c.form)()
         xmlconfig.XMLConfig('configure.zcml', collective.z3cform.datetimewidget)()
