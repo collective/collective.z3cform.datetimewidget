@@ -84,16 +84,17 @@ class DatetimeWidget(DateWidget):
         return self._padded_value(self.minute)
 
     def extract(self, default=z3c.form.interfaces.NOVALUE):
+        # get normal input fields
         day = self.request.get(self.name + '-day', default)
         month = self.request.get(self.name + '-month', default)
         year = self.request.get(self.name + '-year', default)
         hour = self.request.get(self.name + '-hour', default)
         minute = self.request.get(self.name + '-min', default)
 
-        if default in (year, month, day, hour, minute):
-            return default
-
-        if self.ampm is True and int(hour)!=12:
+        if (self.ampm is True and
+            hour is not default and
+            minute is not default and
+            int(hour)!=12):
             ampm = self.request.get(self.name + '-ampm', default)
             if ampm == 'PM':
                 hour = str(12+int(hour))
@@ -102,7 +103,24 @@ class DatetimeWidget(DateWidget):
             elif ampm != 'AM':
                 return default
 
-        return (year, month, day, hour, minute)
+        if default not in (year, month, day, hour, minute):
+            return (year, month, day, hour, minute)
+
+        # get a hidden value
+        formatter = self.request.locale.dates.getFormatter("dateTime", "short")
+        hidden_date = self.request.get(self.name, '')
+        try:
+            dateobj = formatter.parse(hidden_date)
+            return (str(dateobj.year),
+                    str(dateobj.month),
+                    str(dateobj.day),
+                    str(dateobj.hour),
+                    str(dateobj.minute))
+        except zope.i18n.format.DateTimeParseError:
+            pass
+        
+        return default
+
 
 @zope.component.adapter(zope.schema.interfaces.IField, z3c.form.interfaces.IFormLayer)
 @zope.interface.implementer(z3c.form.interfaces.IFieldWidget)

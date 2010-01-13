@@ -61,11 +61,14 @@ class WidgetTestCase(object):
         xmlconfig.XMLConfig('meta.zcml', z3c.form)()
         xmlconfig.XMLConfig('configure.zcml', collective.z3cform.datetimewidget)()
 
-    def tearDown(test):
+    def tearDown(self):
         setup.placefulTearDown()
 
+    def testrequest(self, lang="en", form={}):
+        return TestRequest(HTTP_ACCEPT_LANGUAGE=lang, form=form)
+
     def setupWidget(self, field, lang="en"):
-        request = TestRequest(HTTP_ACCEPT_LANGUAGE=lang)
+        request = self.testrequest(lang=lang)
         widget = zope.component.getMultiAdapter((field, request),
                                                 IFieldWidget)
         widget.id = 'foo'

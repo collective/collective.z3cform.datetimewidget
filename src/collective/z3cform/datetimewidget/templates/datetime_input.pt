@@ -134,8 +134,8 @@
                        onselect view/onselect;" />
 <select id="" name="" class="" tabindex="" disabled=""
         tal:condition="view/ampm"
-        tal:attributes="id string:${view/id}-month;
-                        name string:${view/name}-month;
+        tal:attributes="id string:${view/id}-ampm;
+                        name string:${view/name}-ampm;
                         class view/klass;
                         style view/style;
                         title view/title;

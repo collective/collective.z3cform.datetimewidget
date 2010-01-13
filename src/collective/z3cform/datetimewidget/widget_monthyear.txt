@@ -8,15 +8,21 @@ we test the real configuration. Let's test the Widget:
   >>> import datetime
   >>> import z3c.form
   >>> import zope.schema
-  >>> from z3c.form.testing import TestRequest
   >>> from collective.z3cform.datetimewidget import MonthYearFieldWidget
 
-  >>> request = TestRequest(HTTP_ACCEPT_LANGUAGE = 'en')
+  >>> request = self.testrequest()
   >>> field = zope.schema.Date(default=datetime.date(2007, 4, 1))
   >>> widget = MonthYearFieldWidget(field, request)
   >>> widget.id = 'foo'
   >>> widget.name = 'bar'
   >>> widget.update()
+  >>> widget.extract() is z3c.form.interfaces.NOVALUE
+  True
+
+
+INPUT_MODE
+----------
+
   >>> print widget.render()
   <input type="hidden" id="foo-day" name="bar-day"
          class="monthyear-widget required date-field" size="2"
@@ -41,13 +47,37 @@ we test the real configuration. Let's test the Widget:
          accesskey="" size="4" maxlength="4" value="2007" />
   <input name="bar-empty-marker" type="hidden" value="1" />
 
+
+  >>> widget.request = self.testrequest(
+  ...     form={'bar-day': '1',
+  ...           'bar-month': '4',
+  ...           'bar-year': '2007',
+  ...           'bar-empty-marker': '1',
+  ...           }
+  ...     )
+  >>> widget.extract()
+  ('2007', '4', '1')
+
+
+DISPLAY_MODE
+------------
+
   >>> widget.mode = z3c.form.interfaces.DISPLAY_MODE
   >>> print widget.render()
   <span id="foo" class="monthyear-widget required date-field">4/1/07</span>
+
+
+HIDDEN_MODE
+-----------
 
   >>> widget.mode = z3c.form.interfaces.HIDDEN_MODE
   >>> print widget.render()
   <input type="hidden" id="foo" name="bar"
            class="hidden-widget" value="4/1/07" />
+  >>> widget.request = self.testrequest(
+  ...     form={'bar': '4/1/07'}
+  ...     )
+  >>> widget.extract()
+  ('2007', '4', '1')
 
 

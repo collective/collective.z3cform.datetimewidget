@@ -19,7 +19,6 @@
 #                                                                           #
 #############################################################################
 
-
 import zope.i18n
 import zope.schema
 import zope.interface
@@ -94,12 +93,26 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
         return self.value[2]
     
     def extract(self, default=z3c.form.interfaces.NOVALUE):
+        # get normal input fields
         day = self.request.get(self.name + '-day', default)
         month = self.request.get(self.name + '-month', default)
         year = self.request.get(self.name + '-year', default)
-        if default in (year, month, day):
-            return default
-        return (year, month, day)
+
+        if not default in (year, month, day):
+            return (year, month, day)
+
+        # get a hidden value
+        formatter = self.request.locale.dates.getFormatter("date", "short")
+        hidden_date = self.request.get(self.name, '')
+        try:
+            dateobj = formatter.parse(hidden_date)
+            return (str(dateobj.year),
+                    str(dateobj.month),
+                    str(dateobj.day))
+        except zope.i18n.format.DateTimeParseError:
+            pass
+        
+        return default
 
     def show_today_link_js(self):
         now = datetime.today()
