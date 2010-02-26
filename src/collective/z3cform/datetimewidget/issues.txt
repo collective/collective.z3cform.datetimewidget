@@ -63,5 +63,5 @@ ISSUE 1
      <span id="form-widgets-datetime"
        class="datetime-widget required datetime-field">Thu Oct  1 06:35:00 0099</span>
   </div>
-  ... <input ... id="form-buttons-apply" ...
+  ...<input... id="form-buttons-apply" ...
 
