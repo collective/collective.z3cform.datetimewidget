@@ -1,8 +1,8 @@
 Changelog
 =========
 
-0.1a10 (svn/unreleased)
------------------------
+1.0 (2010-04-18)
+----------------
 
  * extract values in HIDDEN_MODE and add test for extract() [csenger]
  * fix handling of AM/PM in DateTimeWidget and add test [csenger]
