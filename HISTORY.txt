@@ -4,6 +4,8 @@ Changelog
 1.0.1 (unreleased)
 ------------------
 
+ * add show_today_link to the IDateWidget interface [csenger]
+
 1.0 (2010-04-18)
 ----------------
 
