@@ -1,10 +1,11 @@
 Changelog
 =========
 
-1.0.1 (unreleased)
+1.0.1 (2010-06-30)
 ------------------
 
  * add show_today_link to the IDateWidget interface [csenger]
+ * Italian translation added [garbas]
 
 1.0 (2010-04-18)
 ----------------
