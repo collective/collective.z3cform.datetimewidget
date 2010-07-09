@@ -1,3 +1,4 @@
+<tal:root>
 <input type="hidden" id="" name="" class="" title="" lang="" disabled=""
        readonly="" alt="" tabindex="" accesskey="" size="2" maxlength="2"
        tal:attributes="id string:${view/id}-day;
@@ -84,3 +85,4 @@
        tal:attributes="name string:${view/name}-empty-marker" />
 <a tal:condition="view/show_today_link"
    tal:replace="structure view/show_today_link" />
+</tal:root>

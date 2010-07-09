@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.0.2 (unreleased)
+------------------
+
+* Fix invalid XML (Chameleon compatibility)
+  [wichert]
+
 1.0.1 (2010-06-30)
 ------------------
 

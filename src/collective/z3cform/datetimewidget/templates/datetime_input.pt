@@ -1,3 +1,4 @@
+<tal:root>
 <input type="text" id="" name="" class="" title="" lang="" disabled=""
        readonly="" alt="" tabindex="" accesskey="" size="2" maxlength="2"
        tal:attributes="id string:${view/id}-day;
@@ -168,3 +169,4 @@
 </a>
 <script tal:condition="view/show_today_link" type="text/javascript"
         tal:content="view/show_today_link_js" />
+</tal:root>
