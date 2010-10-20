@@ -1,4 +1,4 @@
-#-*- coding: utf-8 -*- 
+#-*- coding: utf-8 -*-
 
 #############################################################################
 #                                                                           #
@@ -37,28 +37,49 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
 
     zope.interface.implementsOnly(IDateWidget)
 
+    calendar_type = 'gregorian'
     klass = u'date-widget'
-    show_today_link = False
     value = ('', '', '')
+
+
+    #
+    # pure javascript no dependencies
+    show_today_link = False
+
+    #
+    # Requires: jquery.tools.datewidget.js, jquery.js
+    # Read more: http://flowplayer.org/tools/dateinput/index.html
+    show_jquerytools_dateinput = False
+    jquerytools_dateinput_config = 'selectors: true, ' \
+                                   'trigger: true, ' \
+                                   'yearRange: [-10, 10]'
+    # TODO: yearRange shoud respect site_properties values for
+    #       calendar_starting_year and valendar_future_years_avaliable
+
+
+    #
+    # TODO: implement same thing for JQuery.UI
 
     def update(self):
         super(DateWidget, self).update()
         z3c.form.browser.widget.addFieldClass(self)
 
+    @property
     def months(self):
-        monthNames = self.request.locale.dates.calendars['gregorian'].getMonthNames()
-
         try:
             selected = int(self.month)
         except:
             selected = -1
-        
-        for i, month in enumerate(monthNames):
+
+        calendar = self.request.locale.dates.calendars[self.calendar_type]
+        month_names = calendar.getMonthNames()
+
+        for i, month in enumerate(month_names):
             yield dict(
                 name     = month,
                 value    = i+1,
                 selected = i+1 == selected)
-    
+
     @property
     def formatted_value(self):
         if self.value == ('', '', ''):
@@ -77,21 +98,21 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
         if year:
             return year
         return self.value[0]
-    
+
     @property
     def month(self):
         month = self.request.get(self.name+'-month', None)
         if month:
             return month
         return self.value[1]
-    
+
     @property
     def day(self):
         day = self.request.get(self.name+'-day', None)
         if day:
             return day
         return self.value[2]
-    
+
     def extract(self, default=z3c.form.interfaces.NOVALUE):
         # get normal input fields
         day = self.request.get(self.name + '-day', default)
@@ -111,7 +132,7 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
                     str(dateobj.day))
         except zope.i18n.format.DateTimeParseError:
             pass
-        
+
         return default
 
     def show_today_link_js(self):
@@ -119,19 +140,64 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
         show_link_func = self.id+'-show-today-link'
         for i in ['-', '_']:
             show_link_func = show_link_func.replace(i, '')
-        return '''
-            <a href="#" onclick="return %(show_link_func)s()">%(today)s</a>
-            <script type="text/javascript">
-                var %(show_link_func)s = function() {
-                    document.getElementById('%(id)s-day').value = %(day)s;
-                    document.getElementById('%(id)s-month').value = %(month)s;
-                    document.getElementById('%(id)s-year').value = %(year)s;
-                    return false;
-                }</script>''' % dict(
-                    id = self.id, show_link_func = show_link_func,
-                    day = now.day, month = now.month, year = now.year,
-                    today = zope.i18n.translate(_(u"Today"), context=self.request))
+        return '<a href="#" onclick="' \
+            'document.getElementById(\'%(id)s-day\').value = %(day)s;' \
+            'document.getElementById(\'%(id)s-month\').value = %(month)s;' \
+            'document.getElementById(\'%(id)s-year\').value = %(year)s;' \
+            'return false;">%(today)s</a>' % dict(
+                id = self.id,
+                day = now.day,
+                month = now.month,
+                year = now.year,
+                today = zope.i18n.translate(_(u"Today"), context=self.request)
+            )
 
+    popup_calendar_icon = '.css("background","url(popup_calendar.gif")' \
+                          '.css("height", "16px")' \
+                          '.css("width", "16px")' \
+                          '.css("display", "inline-block")' \
+                          '.css("vertical-align", "middle")'
+    def show_jquerytools_dateinput_js(self):
+        language = getattr(self.request, 'LANGUAGE', 'en')
+        calendar = self.request.locale.dates.calendars[self.calendar_type]
+        localize =  '$.tools.dateinput.localize("' + language + '", {'
+        localize += 'months: "%s",' % ','.join(calendar.getMonthNames())
+        localize += 'shortMonths: "%s",' % ','.join(calendar.getMonthAbbreviations())
+        localize += 'days: "%s",' % ','.join(calendar.getDayNames())
+        localize += 'shortDays: "%s",' % ','.join(calendar.getDayAbbreviations())
+        localize += '});'
+
+        config = 'lang: "%s", ' % language
+        if self.value != ('', '', ''):
+            config += 'value: new Date(%s, %s, %s), ' % self.value
+        config += 'change: function() { ' \
+                    'var value = this.getValue("yyyy-mm-dd").split("-"); \n' \
+                    '$("#%(id)s-year").val(value[0]); \n' \
+                    '$("#%(id)s-month").val(value[1]); \n' \
+                    '$("#%(id)s-day").val(value[2]); \n' \
+                '}, ' % dict(id = self.id)
+        config += self.jquerytools_dateinput_config
+
+        return '''
+            <input type="hidden" name="%(name)s-calendar"
+                   id="%(id)s-calendar" />
+            <script type="text/javascript">
+                %(localize)s
+                $("#%(id)s-calendar").dateinput({%(config)s}).unbind('change')
+                    .bind('onShow', function (event) {
+                        var trigger_offset = $(this).next().offset();
+                        $(this).data('dateinput').getCalendar().offset(
+                            {top: trigger_offset.top+20, left: trigger_offset.left}
+                        );
+                    });
+                $("#%(id)s-calendar").next()%(popup_calendar_icon)s;
+
+            </script>''' % dict(
+                id=self.id, name=self.name,
+                day=self.day, month=self.month, year=self.year,
+                config=config, language=language, localize=localize,
+                popup_calendar_icon=self.popup_calendar_icon,
+            )
 
 @zope.component.adapter(zope.schema.interfaces.IField, z3c.form.interfaces.IFormLayer)
 @zope.interface.implementer(z3c.form.interfaces.IFieldWidget)

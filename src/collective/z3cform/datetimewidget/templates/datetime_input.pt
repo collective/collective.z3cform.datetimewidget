@@ -1,4 +1,5 @@
 <tal:root>
+
 <input type="text" id="" name="" class="" title="" lang="" disabled=""
        readonly="" alt="" tabindex="" accesskey="" size="2" maxlength="2"
        tal:attributes="id string:${view/id}-day;
@@ -163,10 +164,11 @@
 </select>
 <input name="field-empty-marker" type="hidden" value="1"
        tal:attributes="name string:${view/name}-empty-marker" />
-<a href="#" tal:condition="view/show_today_link"
-   tal:attributes="onclick string:return ${view/show_today_link_func}()">
-    Today
-</a>
-<script tal:condition="view/show_today_link" type="text/javascript"
-        tal:content="view/show_today_link_js" />
+
+<a tal:condition="view/show_calendar"
+   tal:replace="structure view/show_calendar_js" />
+
+<a tal:condition="view/show_today_link"
+   tal:replace="structure view/show_today_link_js" />
+
 </tal:root>

@@ -1,3 +1,5 @@
+<tal:root>
+
 <span id="" class=""
       tal:attributes="id view/id;
                       class view/klass;
@@ -16,3 +18,5 @@
                       onkeyup view/onkeyup"><tal:block
       condition="view/formatted_value" content="view/formatted_value"
 /></span>
+
+</tal:root>
