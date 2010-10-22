@@ -4,6 +4,8 @@ Changelog
 1.0.3 (unreleased)
 ------------------
 
+* Should use None for tal:attributes (Chameleon compatibility)
+  [rossp]
 
 1.0.2 (2010-07-20)
 ------------------

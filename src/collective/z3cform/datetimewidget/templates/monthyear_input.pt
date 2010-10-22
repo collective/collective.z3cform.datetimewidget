@@ -53,7 +53,7 @@
     <option value="" selected=""
             tal:repeat="item view/months"
             tal:attributes="value item/value;
-                            selected python:item['selected'] and 'selected' or ''"
+                            selected python:item['selected'] and 'selected' or None"
             tal:content="item/name">label</option>
 </select> /
 <input type="text" id="" name="" class="" title="" lang="" disabled=""

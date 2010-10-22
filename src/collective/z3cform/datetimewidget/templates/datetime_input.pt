@@ -53,7 +53,7 @@
     <option value="" selected=""
             tal:repeat="item view/months"
             tal:attributes="value item/value;
-                            selected python:item['selected'] and 'selected' or ''"
+                            selected python:item['selected'] and 'selected' or None"
             tal:content="item/name">label</option>
 </select> /
 <input type="text" id="" name="" class="" title="" lang="" disabled=""
@@ -157,7 +157,7 @@
                         onfocus view/onfocus;
                         onblur view/onblur;
                         onchange view/onchange;">
-    <option tal:attributes="selected python:not view.is_pm() and 'selected' or ''"
+    <option tal:attributes="selected python:not view.is_pm() and 'selected' or None"
             value="AM" selected="">AM</option>
     <option tal:attributes="selected python:view.is_pm() and 'selected' or ''"
             value="PM" selected="">PM</option>
