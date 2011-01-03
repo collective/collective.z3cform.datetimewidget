@@ -110,15 +110,9 @@ inserting current date into the fields.
          accesskey="" size="4" maxlength="4" value="2007" />
   <input name="bar-empty-marker" type="hidden" value="1" />
   <BLANKLINE>
-              <a href="#" onclick="return fooshowtodaylink()">Today</a>
-              <script type="text/javascript">
-                  var fooshowtodaylink = function() {
-                      document.getElementById('foo-day').value = ...;
-                      document.getElementById('foo-month').value = ...;
-                      document.getElementById('foo-year').value = ...;
-                      return false;
-                  }</script>
   <BLANKLINE>
+  <BLANKLINE>
+  <a href="#" onclick="document.getElementById('foo-day').value = 3;document.getElementById('foo-month').value = 1;document.getElementById('foo-year').value = 2011;return false;">Today</a>
 
 
 Translations
@@ -130,21 +124,20 @@ check if translations are working
   >>> widget.update()
   >>> widget.show_today_link = True
   >>> print widget.render()
-  <input...
+  <input... 
   ...
-      <option value="1">januar</option>
-      <option value="2">februar</option>
-      <option value="3">marec</option>
-      <option value="4" selected="selected">april</option>
-      <option value="5">maj</option>
-      <option value="6">junij</option>
-      <option value="7">julij</option>
-      <option value="8">avgust</option>
-      <option value="9">september</option>
-      <option value="10">oktober</option>
-      <option value="11">november</option>
-      <option value="12">december</option>
+      <option ...>januar</option>
+      <option ...>februar</option>
+      <option ...>marec</option>
+      <option ...>april</option>
+      <option ...>maj</option>
+      <option ...>junij</option>
+      <option ...>julij</option>
+      <option ...>avgust</option>
+      <option ...>september</option>
+      <option ...>oktober</option>
+      <option ...>november</option>
+      <option ...>december</option>
   ...
-              <a href="#" onclick="return fooshowtodaylink()">Danes</a>
-  ...
+  <a ...>Danes</a>
 

@@ -20,15 +20,13 @@
 #############################################################################
 __docformat__ = "reStructuredText"
 
+import doctest
 import unittest
 from zope.app.testing import setup
-from zope.testing import doctest
 from z3c.form.testing import TestRequest
-from z3c.form.interfaces import IFieldWidget, DISPLAY_MODE
-from z3c.form import interfaces
+from z3c.form.interfaces import IFieldWidget
 
 from Testing import ZopeTestCase as ztc
-import datetime
 from StringIO import StringIO
 import z3c.form
 import zope.schema
@@ -85,7 +83,7 @@ def test_suite():
             'converter.txt',
             'issues.txt',
             test_class=WidgetTestCase,
-            optionflags=doctest.REPORT_ONLY_FIRST_FAILURE |
+            optionflags=
                         doctest.NORMALIZE_WHITESPACE |
                         doctest.ELLIPSIS |
                         doctest.REPORT_UDIFF,
