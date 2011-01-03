@@ -85,8 +85,8 @@
 <input name="field-empty-marker" type="hidden" value="1"
        tal:attributes="name string:${view/name}-empty-marker" />
 
-<a tal:condition="view/show_calendar"
-   tal:replace="structure view/show_calendar_js" />
+<a tal:condition="view/show_jquerytools_dateinput"
+   tal:replace="structure view/show_jquerytools_dateinput_js" />
 
 <a tal:condition="view/show_today_link"
    tal:replace="structure view/show_today_link_js" />

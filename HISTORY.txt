@@ -1,17 +1,19 @@
 Changelog
 =========
 
-1.0.3 (unreleased)
+1.0.3 (2011-01-03)
 ------------------
 
-* Should use None for tal:attributes (Chameleon compatibility)
-  [rossp]
+ * Should use None for tal:attributes (Chameleon compatibility)
+   [rossp]
+ * Added options for calendar (via jquery.tools.dateinput)
+   [garbas]
 
 1.0.2 (2010-07-20)
 ------------------
 
-* Fix invalid XML (Chameleon compatibility)
-  [wichert]
+ * Fix invalid XML (Chameleon compatibility)
+   [wichert]
 
 1.0.1 (2010-06-30)
 ------------------
