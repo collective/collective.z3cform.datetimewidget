@@ -215,7 +215,13 @@ INPUT_MODE
   >>> widget.extract()
   ('2007', '4', '1', '13', '00') 
 
-
+  >>> print widget.show_jquerytools_dateinput_js()
+  <BLANKLINE>
+        <input type="hidden" name="bar-calendar"
+               id="foo-calendar" />
+        <script type="text/javascript">
+  ...
+        
 DISPLAY_MODE
 ''''''''''''
 

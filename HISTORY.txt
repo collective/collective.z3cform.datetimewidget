@@ -1,6 +1,11 @@
 Changelog
 =========
 
+unreleased 
+----------
+    
+    * fixed show_jquerytools_dateinput_js for DatetimeWidget [awello]
+    
 1.0.3 (2011-01-03)
 ------------------
 

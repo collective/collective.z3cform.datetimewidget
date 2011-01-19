@@ -168,8 +168,8 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
         localize += '});'
 
         config = 'lang: "%s", ' % language
-        if self.value != ('', '', ''):
-            config += 'value: new Date(%s, %s, %s), ' % self.value
+        if self.value[:3] != ('', '', ''):
+            config += 'value: new Date(%s, %s, %s), ' % (self.value[:3])
         config += 'change: function() { ' \
                     'var value = this.getValue("yyyy-mm-dd").split("-"); \n' \
                     '$("#%(id)s-year").val(value[0]); \n' \
