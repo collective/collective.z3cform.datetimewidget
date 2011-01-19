@@ -112,7 +112,7 @@ inserting current date into the fields.
   <BLANKLINE>
   <BLANKLINE>
   <BLANKLINE>
-  <a href="#" onclick="document.getElementById('foo-day').value = 3;document.getElementById('foo-month').value = 1;document.getElementById('foo-year').value = 2011;return false;">Today</a>
+  <a href="#" onclick="document.getElementById('foo-day').value = ...;document.getElementById('foo-month').value = ...;document.getElementById('foo-year').value = ...;return false;">Today</a>
 
 
 Translations
