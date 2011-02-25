@@ -164,7 +164,7 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
         localize += 'months: "%s",' % ','.join(calendar.getMonthNames())
         localize += 'shortMonths: "%s",' % ','.join(calendar.getMonthAbbreviations())
         localize += 'days: "%s",' % ','.join(calendar.getDayNames())
-        localize += 'shortDays: "%s",' % ','.join(calendar.getDayAbbreviations())
+        localize += 'shortDays: "%s"' % ','.join(calendar.getDayAbbreviations())
         localize += '});'
 
         config = 'lang: "%s", ' % language

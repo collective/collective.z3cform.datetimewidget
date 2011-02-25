@@ -1,6 +1,12 @@
 Changelog
 =========
 
+trunk
+-----
+
+    * removed trailing comma in JavaScript dict (which broke Internet Explorer)
+      [Brainix]
+
 1.0.4 (2011-01-19)
 ------------------
     
