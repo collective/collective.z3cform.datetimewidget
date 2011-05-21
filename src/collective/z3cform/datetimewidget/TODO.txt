@@ -1,0 +1,7 @@
+If jquerytools dateinput is unavailable, we're getting a js error
+
+If it is, we're lacking styling
+
+Baseline widget should be internationalized.
+
+Enabling jqt dateinput should be doc'd

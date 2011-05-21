@@ -157,10 +157,11 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
                           '.css("width", "16px")' \
                           '.css("display", "inline-block")' \
                           '.css("vertical-align", "middle")'
+
     def show_jquerytools_dateinput_js(self):
         language = getattr(self.request, 'LANGUAGE', 'en')
         calendar = self.request.locale.dates.calendars[self.calendar_type]
-        localize =  '$.tools.dateinput.localize("' + language + '", {'
+        localize =  'jQuery.tools.dateinput.localize("' + language + '", {'
         localize += 'months: "%s",' % ','.join(calendar.getMonthNames())
         localize += 'shortMonths: "%s",' % ','.join(calendar.getMonthAbbreviations())
         localize += 'days: "%s",' % ','.join(calendar.getDayNames())
@@ -172,9 +173,9 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
             config += 'value: new Date(%s, %s, %s), ' % (self.value[:3])
         config += 'change: function() { ' \
                     'var value = this.getValue("yyyy-mm-dd").split("-"); \n' \
-                    '$("#%(id)s-year").val(value[0]); \n' \
-                    '$("#%(id)s-month").val(value[1]); \n' \
-                    '$("#%(id)s-day").val(value[2]); \n' \
+                    'jQuery("#%(id)s-year").val(value[0]); \n' \
+                    'jQuery("#%(id)s-month").val(value[1]); \n' \
+                    'jQuery("#%(id)s-day").val(value[2]); \n' \
                 '}, ' % dict(id = self.id)
         config += self.jquerytools_dateinput_config
 
@@ -182,16 +183,17 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
             <input type="hidden" name="%(name)s-calendar"
                    id="%(id)s-calendar" />
             <script type="text/javascript">
-                %(localize)s
-                $("#%(id)s-calendar").dateinput({%(config)s}).unbind('change')
-                    .bind('onShow', function (event) {
-                        var trigger_offset = $(this).next().offset();
-                        $(this).data('dateinput').getCalendar().offset(
-                            {top: trigger_offset.top+20, left: trigger_offset.left}
-                        );
-                    });
-                $("#%(id)s-calendar").next()%(popup_calendar_icon)s;
-
+                if (jQuery().dateinput) {
+                    %(localize)s
+                    jQuery("#%(id)s-calendar").dateinput({%(config)s}).unbind('change')
+                        .bind('onShow', function (event) {
+                            var trigger_offset = $(this).next().offset();
+                            $(this).data('dateinput').getCalendar().offset(
+                                {top: trigger_offset.top+20, left: trigger_offset.left}
+                            );
+                        });
+                    jQuery("#%(id)s-calendar").next()%(popup_calendar_icon)s;
+                }
             </script>''' % dict(
                 id=self.id, name=self.name,
                 day=self.day, month=self.month, year=self.year,
