@@ -4,6 +4,10 @@ Changelog
 trunk
 -----
 
+    * Made js for dateinput popup check for jQuery().dateinput before invoking
+      it. Changed from $ to jQuery.
+      [smcmahon]
+
     * removed trailing comma in JavaScript dict (which broke Internet Explorer)
       [Brainix]
 
