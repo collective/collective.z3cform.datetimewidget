@@ -1,0 +1,67 @@
+=================
+Fixed Bugs (test)
+=================
+
+All necessary components are set up in the testclass to make sure that
+we test the real configuration. Let's test the Widget:
+
+  >>> import datetime
+  >>> import z3c.form
+  >>> import zope.schema
+  
+
+ISSUE 1
+-------
+
+ * status: SOLVED
+ * reported by: Fabian Reinhard | seantis gmbh
+ * assigned to: Rok Garbas | garbas.si
+
+ After some testing I have seen that some validations are missing, therefore
+ I get an error when adding values like '99' into the year field:
+ "ValueError: year=99 is before 1900; the datetime strftime() methods require
+ year >= 1900"
+
+  >>> import zope.interface
+  >>> class ITest(zope.interface.Interface):
+  ...     date = zope.schema.Date(title=u'Date',required=True)
+  ...     datetime = zope.schema.Datetime(title=u'Datetime', required=True)
+  
+  >>> from z3c.form import form, field, button, interfaces
+  >>> class TestForm(form.EditForm):
+  ...     fields = field.Fields(ITest)
+
+  >>> from z3c.form.testing import TestRequest
+  >>> request = TestRequest(form={
+  ...                 'form.widgets.date-day': u'14',
+  ...                 'form.widgets.date-month': u'2',
+  ...                 'form.widgets.date-year': u'99',
+  ...                 'form.widgets.datetime-day': u'1',
+  ...                 'form.widgets.datetime-month': u'10',
+  ...                 'form.widgets.datetime-year': u'99',
+  ...                 'form.widgets.datetime-hour': u'6',
+  ...                 'form.widgets.datetime-min': u'35',
+  ...                 'form.buttons.apply': u'Apply'})
+  >>> test_form = TestForm(self.root, request)
+
+  >>> from zope.app.pagetemplate import viewpagetemplatefile
+  >>> from z3c.form import tests
+  >>> import os
+  >>> test_form.template = viewpagetemplatefile.BoundPageTemplate(
+  ...         viewpagetemplatefile.ViewPageTemplateFile(
+  ...             'simple_edit.pt', os.path.dirname(tests.__file__)), test_form)
+
+  >>> from zope.interface import alsoProvides
+  >>> alsoProvides(self.root, ITest)
+
+  >>> test_form.mode = interfaces.DISPLAY_MODE
+  >>> test_form.update()
+  >>> print test_form.render() #doctest:
+  <...
+  <div class="row">
+     <label for="form-widgets-datetime">Datetime</label>
+     <span id="form-widgets-datetime"
+       class="datetime-widget required datetime-field">Thu Oct  1 06:35:00 0099</span>
+  </div>
+  ...<input... id="form-buttons-apply" ...
+

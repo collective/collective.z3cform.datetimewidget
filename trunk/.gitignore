@@ -1,0 +1,13 @@
+*.pyc
+*.swp
+
+/.installed.cfg
+/bin/
+/coverage/
+/develop-eggs/
+/dist/
+/docs/
+/eggs/
+/include/
+/lib/
+/src/collective.z3cform.datetimewidget.egg-info/
