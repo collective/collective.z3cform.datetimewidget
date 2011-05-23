@@ -95,7 +95,7 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
     @property
     def year(self):
         year = self.request.get(self.name+'-year', None)
-        if year:
+        if year is not None:
             return year
         return self.value[0]
 
@@ -109,7 +109,7 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
     @property
     def day(self):
         day = self.request.get(self.name+'-day', None)
-        if day:
+        if day is not None:
             return day
         return self.value[2]
 

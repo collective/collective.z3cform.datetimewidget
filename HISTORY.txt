@@ -4,18 +4,21 @@ Changelog
 trunk
 -----
 
-    * Made js for dateinput popup check for jQuery().dateinput before invoking
-      it. Changed from $ to jQuery.
-      [smcmahon]
+ * Avoid error fetching widget values when no year or day was entered.
+   [davisagli]
 
-    * removed trailing comma in JavaScript dict (which broke Internet Explorer)
-      [Brainix]
+ * Made js for dateinput popup check for jQuery().dateinput before invoking
+   it. Changed from $ to jQuery.
+   [smcmahon]
+
+ * removed trailing comma in JavaScript dict (which broke Internet Explorer)
+   [Brainix]
 
 1.0.4 (2011-01-19)
 ------------------
     
-    * fixed show_jquerytools_dateinput_js for DatetimeWidget [awello]
-    * fix time-dependent test [davisagli]
+ * fixed show_jquerytools_dateinput_js for DatetimeWidget [awello]
+ * fix time-dependent test [davisagli]
     
 1.0.3 (2011-01-03)
 ------------------
