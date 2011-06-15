@@ -4,6 +4,10 @@ Changelog
 trunk
 -----
 
+ * Fix issue with jQuery date input widget not being displayed when
+   an incomplete date was entered.
+   [davidjb]
+
  * Avoid error fetching widget values when no year or day was entered.
    [davisagli]
 

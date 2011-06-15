@@ -169,8 +169,11 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
         localize += '});'
 
         config = 'lang: "%s", ' % language
-        if self.value[:3] != ('', '', ''):
-            config += 'value: new Date(%s, %s, %s), ' % (self.value[:3])
+
+        value_date = self.value[:3]
+        if '' not in value_date:
+            config += 'value: new Date(%s, %s, %s), ' % (value_date)
+
         config += 'change: function() { ' \
                     'var value = this.getValue("yyyy-mm-dd").split("-"); \n' \
                     'jQuery("#%(id)s-year").val(value[0]); \n' \

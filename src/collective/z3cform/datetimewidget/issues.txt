@@ -65,3 +65,75 @@ ISSUE 1
   </div>
   ...<input... id="form-buttons-apply" ...
 
+
+ISSUE 2
+-------
+
+ * status: SOLVED
+ * reported by: David Beitey | davidjb
+ * assigned to: David Beitey | davidjb
+
+ An issue is present when a user submits an incomplete date, causing the
+ JavaScript generating the jQuery widget to have a syntax error with the
+ default JS Date() as some of the values are empty. This leads to the widget
+ not getting displayed after either entering no values on a required field
+ or entering an incomplete date and/or datetime.
+
+  >>> field = zope.schema.Datetime()
+  >>> widget = self.setupWidget(field)
+  >>> widget.ampm = True
+  >>> widget.update()
+  >>> widget.extract() is z3c.form.interfaces.NOVALUE
+  True
+
+  Create our fake request with missing values to check our handling.
+
+  >>> widget.request = self.testrequest(
+  ...     form={'bar-day': '',
+  ...           'bar-month': '1',
+  ...           'bar-year': '',
+  ...           'bar-hour': '01',
+  ...           'bar-min': '00',
+  ...           'bar-ampm': 'PM',
+  ...           'bar-empty-marker': '1',
+  ...           }
+  ...     )
+  >>> widget.update()
+  >>> widget.value
+  ('', '1', '', '13', '00')
+
+  Generate our JS and check the results.
+
+  >>> jquerytools_dateinput_js = widget.show_jquerytools_dateinput_js()
+
+  Make sure our JS date syntax error isn't present with this incomplete date.
+
+  >>> 'value: new Date(, 1, )' not in jquerytools_dateinput_js
+  True
+
+  We default to specifying no value at all on our widget 
+  (thus defaulting to today's date).
+
+  >>> 'value: new Date(' not in jquerytools_dateinput_js
+  True
+
+  But make sure we still show a default value if we have a complete date.
+
+  >>> widget.request = self.testrequest(
+  ...     form={'bar-day': '31',
+  ...           'bar-month': '12',
+  ...           'bar-year': '2011',
+  ...           'bar-hour': '01',
+  ...           'bar-min': '00',
+  ...           'bar-ampm': 'PM',
+  ...           'bar-empty-marker': '1',
+  ...           }
+  ...     )
+  >>> widget.update()
+  >>> widget.value
+  ('2011', '12', '31', '13', '00')
+  
+  >>> 'value: new Date(2011, 12, 31)' in widget.show_jquerytools_dateinput_js()
+  True
+
+
