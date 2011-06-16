@@ -172,7 +172,7 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
 
         value_date = self.value[:3]
         if '' not in value_date:
-            config += 'value: new Date(%s, %s, %s), ' % (value_date)
+            config += 'value: new Date("%s/%s/%s"), ' % (value_date)
 
         config += 'change: function() { ' \
                     'var value = this.getValue("yyyy-mm-dd").split("-"); \n' \

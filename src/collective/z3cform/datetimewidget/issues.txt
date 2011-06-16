@@ -111,6 +111,9 @@ ISSUE 2
   >>> 'value: new Date(, 1, )' not in jquerytools_dateinput_js
   True
 
+  >>> 'value: new Date("/1/")' not in jquerytools_dateinput_js
+  True
+
   We default to specifying no value at all on our widget 
   (thus defaulting to today's date).
 
@@ -132,8 +135,12 @@ ISSUE 2
   >>> widget.update()
   >>> widget.value
   ('2011', '12', '31', '13', '00')
-  
-  >>> 'value: new Date(2011, 12, 31)' in widget.show_jquerytools_dateinput_js()
-  True
 
+  Note that our date should get included like this as a string to avoid 
+  date offset issues as Javascript expects Date objects defined as 
+  Date(2011, 12, 31) to have the starting month index as 0 (so range of 0 
+  to 11).  Providing the date as a string avoids maniuplating the date to suit.
+  
+  >>> 'value: new Date("2011/12/31")' in widget.show_jquerytools_dateinput_js()
+  True
 
