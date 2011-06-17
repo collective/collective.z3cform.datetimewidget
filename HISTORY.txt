@@ -3,6 +3,11 @@ Changelog
 
 trunk
 -----
+
+ * Fix month selection issue with the date input widget.  Previously, due
+   to the leading zero, months < 10 weren't being selected when picking a
+   date on the calendar widget.
+   [davidjb]
  
  * Fix date offset issue for default dates on the jQuery date input widget.
    Providing the default value as a JavaScript Date(yyyy, mm, dd) required

@@ -175,7 +175,7 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
             config += 'value: new Date("%s/%s/%s"), ' % (value_date)
 
         config += 'change: function() { ' \
-                    'var value = this.getValue("yyyy-mm-dd").split("-"); \n' \
+                    'var value = this.getValue("yyyy-m-dd").split("-"); \n' \
                     'jQuery("#%(id)s-year").val(value[0]); \n' \
                     'jQuery("#%(id)s-month").val(value[1]); \n' \
                     'jQuery("#%(id)s-day").val(value[2]); \n' \
