@@ -1,8 +1,9 @@
 Changelog
 =========
 
-trunk
------
+
+1.0.5 (2011-06-28)
+------------------
 
  * Change more $ to jQuery.
    [danjacka]
