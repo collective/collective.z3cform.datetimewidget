@@ -161,7 +161,7 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
     def show_jquerytools_dateinput_js(self):
         language = getattr(self.request, 'LANGUAGE', 'en')
         calendar = self.request.locale.dates.calendars[self.calendar_type]
-        localize =  '$.tools.dateinput.localize("' + language + '", {'
+        localize =  'jQuery.tools.dateinput.localize("' + language + '", {'
         localize += 'months: "%s",' % ','.join(calendar.getMonthNames())
         localize += 'shortMonths: "%s",' % ','.join(calendar.getMonthAbbreviations())
         localize += 'days: "%s",' % ','.join(calendar.getDayNames())
@@ -190,8 +190,8 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
                     %(localize)s
                     jQuery("#%(id)s-calendar").dateinput({%(config)s}).unbind('change')
                         .bind('onShow', function (event) {
-                            var trigger_offset = $(this).next().offset();
-                            $(this).data('dateinput').getCalendar().offset(
+                            var trigger_offset = jQuery(this).next().offset();
+                            jQuery(this).data('dateinput').getCalendar().offset(
                                 {top: trigger_offset.top+20, left: trigger_offset.left}
                             );
                         });

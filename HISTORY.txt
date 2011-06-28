@@ -4,6 +4,9 @@ Changelog
 trunk
 -----
 
+ * Change more $ to jQuery.
+   [danjacka]
+
  * Fix month selection issue with the date input widget.  Previously, due
    to the leading zero, months < 10 weren't being selected when picking a
    date on the calendar widget.
