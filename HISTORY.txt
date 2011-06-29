@@ -2,6 +2,12 @@ Changelog
 =========
 
 
+trunk
+-----
+
+ * IE was baulking on a missing closing parenthesis.
+   [danjacka]
+
 1.0.5 (2011-06-28)
 ------------------
 

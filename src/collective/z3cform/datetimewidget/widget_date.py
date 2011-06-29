@@ -152,7 +152,7 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
                 today = zope.i18n.translate(_(u"Today"), context=self.request)
             )
 
-    popup_calendar_icon = '.css("background","url(popup_calendar.gif")' \
+    popup_calendar_icon = '.css("background","url(popup_calendar.gif)")' \
                           '.css("height", "16px")' \
                           '.css("width", "16px")' \
                           '.css("display", "inline-block")' \
