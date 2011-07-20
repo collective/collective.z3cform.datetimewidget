@@ -2,11 +2,21 @@ Changelog
 =========
 
 
-trunk
------
+1.1 (unreleased)
+----------------
+
+ * Added a GS profile (conditionally loaded in configure.zcml if generic
+   setup is installed) to enable the plone.app.jquerytools css & js support
+   for dateinput popup.
+   [smcmahon]
+
+ * Made js for dateinput popup check for jQuery().dateinput before invoking
+   it. Changed from $ to jQuery.
+   [smcmahon]
 
  * IE was baulking on a missing closing parenthesis.
    [danjacka]
+
 
 1.0.5 (2011-06-28)
 ------------------

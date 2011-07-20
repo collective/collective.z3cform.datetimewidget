@@ -1,8 +1,10 @@
 <configure
+    xmlns:zcml="http://namespaces.zope.org/zcml"
     xmlns="http://namespaces.zope.org/zope"
     xmlns:z3c="http://namespaces.zope.org/z3c"
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:i18n="http://namespaces.zope.org/i18n"
+    xmlns:gs="http://namespaces.zope.org/genericsetup"
     i18n_domain="collective.z3cform.datetimewidget">
 
 
@@ -114,5 +116,21 @@
  		widget=".interfaces.IMonthYearWidget"        
  		layer="z3c.form.interfaces.IFormLayer"
  		template="templates/hidden.pt" />
+
+    <configure zcml:condition="installed plone.app.jquerytools">
+        <gs:registerProfile
+          name="default"
+          title="collective.z3cform.datetimewidget"
+          directory="profiles/default"
+          description="Enable plone.app.jquerytools support for date-time widget"
+          provides="Products.GenericSetup.interfaces.EXTENSION"
+          />
+
+        <gs:importStep
+            name="collective.z3cform.datetimewidget_various"
+            title="collective.z3cform.datetimewidget date picker support"
+            description="Enable JQuery Tools date picker"
+            handler="collective.z3cform.datetimewidget.setuphandlers.importVarious" />
+    </configure>
 
 </configure>
