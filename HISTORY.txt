@@ -2,8 +2,11 @@ Changelog
 =========
 
 
-1.1 (unreleased)
+1.1 (2011-09-12)
 ----------------
+
+ * Fix validation errors so they are caught and correctly reported by z3c.form.
+   [davisagli]
 
  * Added a GS profile (conditionally loaded in configure.zcml if generic
    setup is installed) to enable the plone.app.jquerytools css & js support

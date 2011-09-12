@@ -61,9 +61,9 @@ class IMonthYearWidget(z3c.form.interfaces.IWidget):
 
 # Errors
 
-class DateValidationError(zope.schema.ValidationError):
+class DateValidationError(zope.schema.ValidationError, ValueError):
     __doc__ = _(u'Please enter a valid date.')
 
 
-class DatetimeValidationError(zope.schema.ValidationError):
+class DatetimeValidationError(zope.schema.ValidationError, ValueError):
     __doc__ = _(u'Please enter a valid date and time.')
