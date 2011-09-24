@@ -117,20 +117,24 @@
  		layer="z3c.form.interfaces.IFormLayer"
  		template="templates/hidden.pt" />
 
-    <configure zcml:condition="installed plone.app.jquerytools">
-        <gs:registerProfile
-          name="default"
-          title="collective.z3cform.datetimewidget"
-          directory="profiles/default"
-          description="Enable plone.app.jquerytools support for date-time widget"
-          provides="Products.GenericSetup.interfaces.EXTENSION"
-          />
+    <configure zcml:condition="installed Products.GenericSetup">
+        <configure zcml:condition="installed plone.app.jquerytools">
+            <include package="Products.GenericSetup" file="meta.zcml"/>
+          
+            <gs:registerProfile
+              name="default"
+              title="collective.z3cform.datetimewidget"
+              directory="profiles/default"
+              description="Enable plone.app.jquerytools support for date-time widget"
+              provides="Products.GenericSetup.interfaces.EXTENSION"
+              />
 
-        <gs:importStep
-            name="collective.z3cform.datetimewidget_various"
-            title="collective.z3cform.datetimewidget date picker support"
-            description="Enable JQuery Tools date picker"
-            handler="collective.z3cform.datetimewidget.setuphandlers.importVarious" />
+            <gs:importStep
+                name="collective.z3cform.datetimewidget_various"
+                title="collective.z3cform.datetimewidget date picker support"
+                description="Enable JQuery Tools date picker"
+                handler="collective.z3cform.datetimewidget.setuphandlers.importVarious" />
+        </configure>
     </configure>
 
 </configure>
