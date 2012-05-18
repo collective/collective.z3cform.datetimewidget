@@ -22,26 +22,32 @@ __docformat__ = "reStructuredText"
 
 import doctest
 import unittest
-from zope.app.testing import setup
+import zope.component.testing
 from z3c.form.testing import TestRequest
 from z3c.form.interfaces import IFieldWidget
 
 from Testing import ZopeTestCase as ztc
 from StringIO import StringIO
 import z3c.form
-import zope.schema
 import zope.component
-import zope.app.component
+import zope.publisher
+import zope.traversing
 import collective.z3cform.datetimewidget
 from zope.configuration import xmlconfig
+
+
+class DummyContext(object):
+    pass
 
 
 class WidgetTestCase(object):
 
     def setUp(self):
-        self.root = setup.placefulSetUp(True)
+        self.root = DummyContext()
+        zope.component.testing.setUp()
         xmlconfig.XMLConfig('meta.zcml', zope.component)()
-        xmlconfig.XMLConfig('meta.zcml', zope.app.component)()
+        xmlconfig.XMLConfig('configure.zcml', zope.traversing)()
+        xmlconfig.XMLConfig('configure.zcml', zope.publisher)()
         try:
             xmlconfig.XMLConfig('configure.zcml', zope.i18n)()
         except IOError:
@@ -60,7 +66,7 @@ class WidgetTestCase(object):
         xmlconfig.XMLConfig('configure.zcml', collective.z3cform.datetimewidget)()
 
     def tearDown(self):
-        setup.placefulTearDown()
+        zope.component.testing.tearDown()
 
     def testrequest(self, lang="en", form={}):
         return TestRequest(HTTP_ACCEPT_LANGUAGE=lang, form=form)
