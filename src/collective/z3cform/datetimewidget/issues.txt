@@ -26,12 +26,12 @@ ISSUE 1
   >>> class ITest(zope.interface.Interface):
   ...     date = zope.schema.Date(title=u'Date',required=True)
   ...     datetime = zope.schema.Datetime(title=u'Datetime', required=True)
-  
+
   >>> from z3c.form import form, field, button, interfaces
   >>> class TestForm(form.EditForm):
   ...     fields = field.Fields(ITest)
 
-  >>> from z3c.form.testing import TestRequest
+  >>> from collective.z3cform.datetimewidget.tests import TestRequest
   >>> request = TestRequest(form={
   ...                 'form.widgets.date-day': u'14',
   ...                 'form.widgets.date-month': u'2',
