@@ -4,6 +4,8 @@ Changelog
 1.1.2 (unreleased)
 ------------------
 
+* Use viewpagetemplatefile from zope.browserpage.
+  [hannosch]
 
 1.1.1 (2011-09-24)
 ------------------

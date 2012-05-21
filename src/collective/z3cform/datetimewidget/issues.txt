@@ -44,7 +44,7 @@ ISSUE 1
   ...                 'form.buttons.apply': u'Apply'})
   >>> test_form = TestForm(self.root, request)
 
-  >>> from zope.app.pagetemplate import viewpagetemplatefile
+  >>> from zope.browserpage import viewpagetemplatefile
   >>> from z3c.form import tests
   >>> import os
   >>> test_form.template = viewpagetemplatefile.BoundPageTemplate(
