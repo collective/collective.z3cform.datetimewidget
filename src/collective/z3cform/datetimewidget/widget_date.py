@@ -53,15 +53,30 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
     jquerytools_dateinput_config = 'selectors: true, ' \
                                    'trigger: true, ' \
                                    'yearRange: [-10, 10]'
-    # TODO: yearRange shoud respect site_properties values for
-    #       calendar_starting_year and valendar_future_years_avaliable
-
+    
+    def update_config(self):
+        # TODO: add decorator for caching 
+        # update is necessary as site_properties are not 
+        # avaliable on zope startup
+        from zope.site.hooks import getSite
+        from Products.CMFCore.utils import getToolByName
+        
+        context = getSite()
+        pp = getToolByName(context, "portal_properties")
+        sp = getToolByName(pp, "site_properties")
+        now = date.today()
+        years_before = sp.calendar_starting_year - now.year
+        years_after = sp.calendar_future_years_available
+        return 'selectors: true, ' \
+               'trigger: true, ' \
+               'yearRange: [%i, %i]' % (years_before, years_after)
 
     #
     # TODO: implement same thing for JQuery.UI
 
     def update(self):
         super(DateWidget, self).update()
+        self.jquerytools_dateinput_config = self.update_config()
         z3c.form.browser.widget.addFieldClass(self)
 
     @property
