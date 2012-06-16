@@ -4,7 +4,12 @@ Changelog
 1.1.2 (unreleased)
 ------------------
 
-* Use viewpagetemplatefile from zope.browserpage.
+* Fix day names. Also respect the first day of the week from the current
+  locale. This fixes http://code.google.com/p/dexterity/issues/detail?id=272
+  [davisagli]
+
+* Use viewpagetemplatefile from zope.browserpage. This breaks compatibility
+  with Zope < 2.13 and Plone < 4.1 in order to minimize dependencies.
   [hannosch]
 
 1.1.1 (2011-09-24)
