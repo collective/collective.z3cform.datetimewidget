@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.1.2 (unreleased)
+1.2.0 (2012-06-15)
 ------------------
 
 * Fix day names. Also respect the first day of the week from the current
