@@ -164,8 +164,12 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
         localize =  'jQuery.tools.dateinput.localize("' + language + '", {'
         localize += 'months: "%s",' % ','.join(calendar.getMonthNames())
         localize += 'shortMonths: "%s",' % ','.join(calendar.getMonthAbbreviations())
-        localize += 'days: "%s",' % ','.join(calendar.getDayNames())
-        localize += 'shortDays: "%s"' % ','.join(calendar.getDayAbbreviations())
+        # calendar tool's number of days is off by one from jquery tools'
+        localize += 'days: "%s",' % ','.join(
+            [calendar.getDayNames()[6]] + calendar.getDayNames()[:6])
+        localize += 'shortDays: "%s"' % ','.join(
+            [calendar.getDayAbbreviations()[6]] +
+            calendar.getDayAbbreviations()[:6])
         localize += '});'
 
         config = 'lang: "%s", ' % language
@@ -180,6 +184,7 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
                     'jQuery("#%(id)s-month").val(value[1]); \n' \
                     'jQuery("#%(id)s-day").val(value[2]); \n' \
                 '}, ' % dict(id = self.id)
+        config += 'firstDay: %s,' % (calendar.week['firstDay'] % 7)
         config += self.jquerytools_dateinput_config
 
         return '''

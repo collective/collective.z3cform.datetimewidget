@@ -4,6 +4,10 @@ Changelog
 1.1.2 (unreleased)
 ------------------
 
+* Fix day names. Also respect the first day of the week from the current
+  locale. This fixes http://code.google.com/p/dexterity/issues/detail?id=272
+  [davisagli]
+
 
 1.1.1 (2011-09-24)
 ------------------
