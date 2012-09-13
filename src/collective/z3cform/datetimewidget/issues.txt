@@ -144,3 +144,47 @@ ISSUE 2
   >>> 'value: new Date("2011/12/31")' in widget.show_jquerytools_dateinput_js()
   True
 
+ISSUE 2 (github)
+----------------
+
+ * status: SOLVED
+ * reported by: Róman Joost | romanofski
+ * assigned to: Róman Joost | romanofski
+
+ The datetime widgets default month is January. The widgets default
+ value is influenced by this default value and may cause a traceback.
+
+  >>> field = zope.schema.Datetime()
+  >>> widget = self.setupWidget(field)
+  >>> widget.ampm = True
+  >>> widget.update()
+  >>> widget.request = self.testrequest(
+  ...     form={'bar-day': '',
+  ...           'bar-month': '1',
+  ...           'bar-year': '',
+  ...           'bar-hour': '00',
+  ...           'bar-min': '00',
+  ...           'bar-ampm': 'PM',
+  ...           'bar-empty-marker': '1',
+  ...           }
+  ...     )
+  >>> widget.update()
+  >>> widget.formatted_value
+  ''
+
+  The date widget will have the same issue:
+
+  >>> field = zope.schema.Date()
+  >>> widget = self.setupWidget(field)
+  >>> widget.ampm = True
+  >>> widget.update()
+  >>> widget.request = self.testrequest(
+  ...     form={'bar-day': '',
+  ...           'bar-month': '1',
+  ...           'bar-year': '',
+  ...           'bar-empty-marker': '1',
+  ...           }
+  ...     )
+  >>> widget.update()
+  >>> widget.formatted_value
+  ''

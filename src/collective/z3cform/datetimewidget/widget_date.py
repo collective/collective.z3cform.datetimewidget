@@ -82,10 +82,11 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
 
     @property
     def formatted_value(self):
-        if self.value == ('', '', ''):
+        try:
+            date_value = date(*map(int, self.value))
+        except ValueError:
             return ''
         formatter = self.request.locale.dates.getFormatter("date", "short")
-        date_value = date(*map(int, self.value))
         if date_value.year > 1900:
             return formatter.format(date_value)
         # due to fantastic datetime.strftime we need this hack
