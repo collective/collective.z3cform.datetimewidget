@@ -4,6 +4,10 @@ Changelog
 1.2.1 (unreleased)
 ------------------
 
+*  Make sure DOM is ready before activating the dateinput jQuery plugin.
+   This was causing Internet Explorer 7 to fail.
+   [rafaelbco]
+
 
 1.2.0 (2012-06-15)
 ------------------
