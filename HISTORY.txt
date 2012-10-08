@@ -10,6 +10,11 @@ Changelog
    https://github.com/collective/collective.z3cform.datetimewidget/issues/2
    [romanofski]
 
+ * Make sure DOM is ready before activating the dateinput jQuery plugin.
+   This was causing Internet Explorer 7 to fail.
+   [rafaelbco]
+
+
 1.2.0 (2012-06-15)
 ------------------
 

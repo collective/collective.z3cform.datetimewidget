@@ -192,17 +192,19 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
             <input type="hidden" name="%(name)s-calendar"
                    id="%(id)s-calendar" />
             <script type="text/javascript">
-                if (jQuery().dateinput) {
-                    %(localize)s
-                    jQuery("#%(id)s-calendar").dateinput({%(config)s}).unbind('change')
-                        .bind('onShow', function (event) {
-                            var trigger_offset = jQuery(this).next().offset();
-                            jQuery(this).data('dateinput').getCalendar().offset(
-                                {top: trigger_offset.top+20, left: trigger_offset.left}
-                            );
-                        });
-                    jQuery("#%(id)s-calendar").next()%(popup_calendar_icon)s;
-                }
+                jQuery(document).ready(function() {
+                    if (jQuery().dateinput) {
+                        %(localize)s
+                        jQuery("#%(id)s-calendar").dateinput({%(config)s}).unbind('change')
+                            .bind('onShow', function (event) {
+                                var trigger_offset = jQuery(this).next().offset();
+                                jQuery(this).data('dateinput').getCalendar().offset(
+                                    {top: trigger_offset.top+20, left: trigger_offset.left}
+                                );
+                            });
+                        jQuery("#%(id)s-calendar").next()%(popup_calendar_icon)s;
+                    }
+                });
             </script>''' % dict(
                 id=self.id, name=self.name,
                 day=self.day, month=self.month, year=self.year,
