@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.2.1 (unreleased)
+1.2.1 (2012-10-10)
 ------------------
 
 *  Make sure DOM is ready before activating the dateinput jQuery plugin.
