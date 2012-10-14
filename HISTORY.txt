@@ -4,17 +4,15 @@ Changelog
 1.2.2 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
-
-1.2.1 (2012-10-10)
-------------------
-
  * Fixes potential round trip traceback when converting the date(time)
    values to a date(time) object. Happens if integrated with
    collective.z3cform.wizard.
    https://github.com/collective/collective.z3cform.datetimewidget/issues/2
    [romanofski]
+
+
+1.2.1 (2012-10-10)
+------------------
 
  * Make sure DOM is ready before activating the dateinput jQuery plugin.
    This was causing Internet Explorer 7 to fail.
