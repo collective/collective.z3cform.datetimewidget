@@ -1,7 +1,13 @@
 Changelog
 =========
 
-1.2.1 (unreleased)
+1.2.2 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
+1.2.1 (2012-10-10)
 ------------------
 
  * Fixes potential round trip traceback when converting the date(time)
