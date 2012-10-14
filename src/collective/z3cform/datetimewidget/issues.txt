@@ -172,6 +172,19 @@ ISSUE 2 (github)
   >>> widget.formatted_value
   ''
 
+  The required field will not validate the widget value:
+
+  >>> from z3c.form import validator
+  >>> from z3c.form import interfaces
+  >>> field.required
+  True
+  >>> simple = validator.SimpleFieldValidator(
+  ...       None, None, None, field, widget)
+  >>> value = interfaces.IDataConverter(widget).toFieldValue(widget.extract())
+  >>> simple.validate(value)
+  Traceback (most recent call last):
+  RequiredMissing
+
   The date widget will have the same issue:
 
   >>> field = zope.schema.Date()
@@ -188,3 +201,14 @@ ISSUE 2 (github)
   >>> widget.update()
   >>> widget.formatted_value
   ''
+
+  The required field will not validate the widget value:
+
+  >>> field.required
+  True
+  >>> simple = validator.SimpleFieldValidator(
+  ...       None, None, None, field, widget)
+  >>> value = interfaces.IDataConverter(widget).toFieldValue(widget.extract())
+  >>> simple.validate(value)
+  Traceback (most recent call last):
+  RequiredMissing
