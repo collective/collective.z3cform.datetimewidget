@@ -39,10 +39,11 @@ class DatetimeWidget(DateWidget):
 
     @property
     def formatted_value(self):
-        if self.value == ('', '', '', '00', '00'):
+        try:
+            datetime_value = datetime(*map(int, self.value))
+        except ValueError:
             return ''
         formatter = self.request.locale.dates.getFormatter("dateTime", "short")
-        datetime_value = datetime(*map(int, self.value))
         if datetime_value.year > 1900:
             return formatter.format(datetime_value)
         # due to fantastic datetime.strftime we need this hack
