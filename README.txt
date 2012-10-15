@@ -31,3 +31,4 @@ Contributors
  * David Glick - davisagli
  * Rok Garbas - garbas
  * Carsten Senger - csenger
+ * Róman Joost - romanofski
