@@ -1,4 +1,4 @@
-#-*- coding: utf-8 -*- 
+#-*- coding: utf-8 -*-
 
 #############################################################################
 #                                                                           #
@@ -25,7 +25,7 @@ from z3c.form.converter import BaseDataConverter
 from collective.z3cform.datetimewidget.interfaces import DateValidationError, DatetimeValidationError
 
 class DateDataConverter(BaseDataConverter):
-    
+
     def toWidgetValue(self, value):
         if value is self.field.missing_value:
             return ('', '', '')
@@ -46,7 +46,7 @@ class DateDataConverter(BaseDataConverter):
             raise DateValidationError
 
 class DatetimeDataConverter(DateDataConverter):
-    
+
     def toWidgetValue(self, value):
         if value is self.field.missing_value:
             return ('', '', '', '00', '00')
@@ -67,7 +67,7 @@ class DatetimeDataConverter(DateDataConverter):
             raise DatetimeValidationError
 
 class MonthYearDataConverter(DateDataConverter):
-    
+
     def toWidgetValue(self, value):
         if value is self.field.missing_value:
             return ('', '', '1')
