@@ -1,4 +1,4 @@
-#-*- coding: utf-8 -*- 
+#-*- coding: utf-8 -*-
 
 #############################################################################
 #                                                                           #
@@ -119,7 +119,7 @@ class DatetimeWidget(DateWidget):
                     str(dateobj.minute))
         except zope.i18n.format.DateTimeParseError:
             pass
-        
+
         return default
 
 

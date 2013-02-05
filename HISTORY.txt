@@ -4,7 +4,9 @@ Changelog
 1.2.3 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Removed hard-coded styling for calendar popup icon. Leave this to the dateinput.css
+  from plone.app.jquerytools, which was being applied anyway.
+  [smcmahon]
 
 
 1.2.2 (2013-01-13)
@@ -71,7 +73,7 @@ Changelog
    to the leading zero, months < 10 weren't being selected when picking a
    date on the calendar widget.
    [davidjb]
- 
+
  * Fix date offset issue for default dates on the jQuery date input widget.
    Providing the default value as a JavaScript Date(yyyy, mm, dd) required
    months to be in the range of 0 to 11 but outputting as Date("yyyy/mm/dd")
@@ -94,10 +96,10 @@ Changelog
 
 1.0.4 (2011-01-19)
 ------------------
-    
+
  * fixed show_jquerytools_dateinput_js for DatetimeWidget [awello]
  * fix time-dependent test [davisagli]
-    
+
 1.0.3 (2011-01-03)
 ------------------
 

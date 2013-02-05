@@ -141,7 +141,7 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
         show_link_func = self.id+'-show-today-link'
         for i in ['-', '_']:
             show_link_func = show_link_func.replace(i, '')
-        return '<a href="#" onclick="' \
+        return ' <a href="#" onclick="' \
             'document.getElementById(\'%(id)s-day\').value = %(day)s;' \
             'document.getElementById(\'%(id)s-month\').value = %(month)s;' \
             'document.getElementById(\'%(id)s-year\').value = %(year)s;' \
@@ -152,12 +152,6 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
                 year = now.year,
                 today = zope.i18n.translate(_(u"Today"), context=self.request)
             )
-
-    popup_calendar_icon = '.css("background","url(popup_calendar.gif)")' \
-                          '.css("height", "16px")' \
-                          '.css("width", "16px")' \
-                          '.css("display", "inline-block")' \
-                          '.css("vertical-align", "middle")'
 
     def show_jquerytools_dateinput_js(self):
         language = getattr(self.request, 'LANGUAGE', 'en')
@@ -202,14 +196,12 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
                                     {top: trigger_offset.top+20, left: trigger_offset.left}
                                 );
                             });
-                        jQuery("#%(id)s-calendar").next()%(popup_calendar_icon)s;
                     }
                 });
             </script>''' % dict(
                 id=self.id, name=self.name,
                 day=self.day, month=self.month, year=self.year,
                 config=config, language=language, localize=localize,
-                popup_calendar_icon=self.popup_calendar_icon,
             )
 
 @zope.component.adapter(zope.schema.interfaces.IField, z3c.form.interfaces.IFormLayer)
