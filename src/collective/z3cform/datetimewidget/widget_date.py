@@ -29,6 +29,7 @@ import z3c.form.widget
 from datetime import date, datetime
 from interfaces import IDateWidget
 from i18n import MessageFactory as _
+from Products.CMFCore.utils import getToolByName
 
 
 class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
@@ -50,19 +51,37 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
     # Requires: jquery.tools.datewidget.js, jquery.js
     # Read more: http://flowplayer.org/tools/dateinput/index.html
     show_jquerytools_dateinput = False
-    jquerytools_dateinput_config = 'selectors: true, ' \
-                                   'trigger: true, ' \
-                                   'yearRange: [-10, 10]'
-    # TODO: yearRange shoud respect site_properties values for
-    #       calendar_starting_year and valendar_future_years_avaliable
+    jquerytools_dateinput_config = 'selectors: true, trigger: true, '
+    yearRange = 'yearRange: [-10, 10]'
 
-
-    #
     # TODO: implement same thing for JQuery.UI
+
+    def _set_yearRange(self):
+        """Set the value of the yearRange configuration variable using the
+        min/max field properties or the default values stored in portal's site
+        properties.
+        """
+        portal_properties = getToolByName(self.context, 'portal_properties')
+        p = portal_properties['site_properties']
+        today = date.today()
+
+        if self.field.min is not None:
+            start = self.field.min.year - today.year
+        else:
+            calendar_starting_year = getattr(p, 'calendar_starting_year', 2001)
+            start = calendar_starting_year - today.year
+
+        if self.field.max is not None:
+            end = self.field.max.year - today.year
+        else:
+            end = getattr(p, 'calendar_future_years_available', 5)
+
+        self.yearRange = 'yearRange: [%s, %s]' % (start, end)
 
     def update(self):
         super(DateWidget, self).update()
         z3c.form.browser.widget.addFieldClass(self)
+        self._set_yearRange()
 
     @property
     def months(self):
@@ -181,6 +200,7 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
                 '}, ' % dict(id = self.id)
         config += 'firstDay: %s,' % (calendar.week['firstDay'] % 7)
         config += self.jquerytools_dateinput_config
+        config += self.yearRange
 
         return '''
             <input type="hidden" name="%(name)s-calendar"

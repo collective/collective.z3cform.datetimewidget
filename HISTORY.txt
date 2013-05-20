@@ -4,7 +4,9 @@ Changelog
 1.2.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Make Date widget configurable by using the min/max field properties or the
+  default values stored in portal's site properties.
+  [hvelarde]
 
 
 1.2.3 (2013-03-04)
