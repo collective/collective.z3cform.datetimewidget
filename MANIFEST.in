@@ -1,4 +1,6 @@
-include README.txt HISTORY.txt
-recursive-include src/collective *
-global-exclude *pyc
+include *.txt
 
+recursive-include collective *
+recursive-include docs *
+
+global-exclude *.pyc
