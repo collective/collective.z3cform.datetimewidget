@@ -61,7 +61,7 @@ ISSUE 1
   <div class="row">
      <label for="form-widgets-datetime">Datetime</label>
      <span id="form-widgets-datetime"
-       class="datetime-widget required datetime-field">Thu Oct  1 06:35:00 0099</span>
+       class="datetime-widget datetime-field">Thu Oct  1 06:35:00 0099</span>
   </div>
   ...<input... id="form-buttons-apply" ...
 
