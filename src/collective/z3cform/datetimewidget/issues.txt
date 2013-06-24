@@ -8,7 +8,7 @@ we test the real configuration. Let's test the Widget:
   >>> import datetime
   >>> import z3c.form
   >>> import zope.schema
-  
+
 
 ISSUE 1
 -------
@@ -59,9 +59,9 @@ ISSUE 1
   >>> print test_form.render() #doctest:
   <...
   <div class="row">
-     <label for="form-widgets-datetime">Datetime</label>
-     <span id="form-widgets-datetime"
-       class="datetime-widget datetime-field">Thu Oct  1 06:35:00 0099</span>
+     <label for="form-widgets-date">Date</label>
+     <span id="form-widgets-date"
+           class="date-widget required date-field">Sat Feb 14 00:00:00 0099</span>
   </div>
   ...<input... id="form-buttons-apply" ...
 
@@ -114,7 +114,7 @@ ISSUE 2
   >>> 'value: new Date("/1/")' not in jquerytools_dateinput_js
   True
 
-  We default to specifying no value at all on our widget 
+  We default to specifying no value at all on our widget
   (thus defaulting to today's date).
 
   >>> 'value: new Date(' not in jquerytools_dateinput_js
@@ -136,11 +136,11 @@ ISSUE 2
   >>> widget.value
   ('2011', '12', '31', '13', '00')
 
-  Note that our date should get included like this as a string to avoid 
-  date offset issues as Javascript expects Date objects defined as 
-  Date(2011, 12, 31) to have the starting month index as 0 (so range of 0 
+  Note that our date should get included like this as a string to avoid
+  date offset issues as Javascript expects Date objects defined as
+  Date(2011, 12, 31) to have the starting month index as 0 (so range of 0
   to 11).  Providing the date as a string avoids maniuplating the date to suit.
-  
+
   >>> 'value: new Date("2011/12/31")' in widget.show_jquerytools_dateinput_js()
   True
 
