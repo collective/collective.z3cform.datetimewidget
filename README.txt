@@ -32,3 +32,4 @@ Contributors
  * Rok Garbas - garbas
  * Carsten Senger - csenger
  * Róman Joost - romanofski
+ * Héctor Velarde - hvelarde
