@@ -61,8 +61,11 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
         min/max field properties or the default values stored in portal's site
         properties.
         """
-        portal_properties = getToolByName(self.context, 'portal_properties')
-        p = portal_properties['site_properties']
+        portal_properties = getToolByName(self.context, 'portal_properties', None)
+        if portal_properties is not None:
+            p = portal_properties['site_properties']
+        else:
+            p = None
         today = date.today()
 
         if self.field.min is not None:
