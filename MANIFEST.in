@@ -1,6 +1,6 @@
 include *.txt
 
-recursive-include collective *
+recursive-include src *
 recursive-include docs *
 
 global-exclude *.pyc
