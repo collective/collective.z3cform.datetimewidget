@@ -4,6 +4,9 @@ Changelog
 1.2.7 (unreleased)
 ------------------
 
+- Add dutch translations
+  [maartenkling]
+
 - Fix postback of am/pm value.
   [davisagli]
 
@@ -209,4 +212,3 @@ Changelog
 ------------------
 
  * Initial release
-
