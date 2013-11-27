@@ -35,7 +35,11 @@ class DatetimeWidget(DateWidget):
 
     klass = u'datetime-widget'
     value = ('', '', '', '00', '00')
-    ampm  = False
+
+    @property
+    def ampm(self):
+        pattern = self.request.locale.dates.getFormatter('time').getPattern()
+        return bool('a' in pattern)
 
     @property
     def formatted_value(self):

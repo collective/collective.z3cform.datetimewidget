@@ -4,7 +4,8 @@ Changelog
 1.2.6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Determine whether to show am/pm based on the current locale's time format.
+  [davisagli]
 
 
 1.2.5 (2013-07-31)
