@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.2.6 (unreleased)
+1.2.6 (2014-01-27)
 ------------------
 
 - Determine whether to show am/pm based on the current locale's time format.
