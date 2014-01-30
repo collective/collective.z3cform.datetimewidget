@@ -81,7 +81,6 @@ ISSUE 2
 
   >>> field = zope.schema.Datetime()
   >>> widget = self.setupWidget(field)
-  >>> widget.ampm = True
   >>> widget.update()
   >>> widget.extract() is z3c.form.interfaces.NOVALUE
   True
@@ -94,7 +93,6 @@ ISSUE 2
   ...           'bar-year': '',
   ...           'bar-hour': '01',
   ...           'bar-min': '00',
-  ...           'bar-ampm': 'PM',
   ...           'bar-empty-marker': '1',
   ...           }
   ...     )
@@ -128,7 +126,6 @@ ISSUE 2
   ...           'bar-year': '2011',
   ...           'bar-hour': '01',
   ...           'bar-min': '00',
-  ...           'bar-ampm': 'PM',
   ...           'bar-empty-marker': '1',
   ...           }
   ...     )
@@ -156,7 +153,6 @@ ISSUE 2 (github)
 
   >>> field = zope.schema.Datetime()
   >>> widget = self.setupWidget(field)
-  >>> widget.ampm = True
   >>> widget.update()
   >>> widget.request = self.testrequest(
   ...     form={'bar-day': '',
@@ -164,7 +160,6 @@ ISSUE 2 (github)
   ...           'bar-year': '',
   ...           'bar-hour': '00',
   ...           'bar-min': '00',
-  ...           'bar-ampm': 'PM',
   ...           'bar-empty-marker': '1',
   ...           }
   ...     )
@@ -189,7 +184,6 @@ ISSUE 2 (github)
 
   >>> field = zope.schema.Date()
   >>> widget = self.setupWidget(field)
-  >>> widget.ampm = True
   >>> widget.update()
   >>> widget.request = self.testrequest(
   ...     form={'bar-day': '',
