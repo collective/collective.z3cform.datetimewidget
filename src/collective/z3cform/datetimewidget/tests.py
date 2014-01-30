@@ -83,6 +83,7 @@ class WidgetTestCase(object):
                                                 IFieldWidget)
         widget.id = 'foo'
         widget.name = 'bar'
+        widget.ampm = False
         return widget
 
 

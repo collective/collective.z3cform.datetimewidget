@@ -29,6 +29,7 @@ INPUT_MODE
 
 Render without AM/PM support:
 
+  >>> widget.ampm = False
   >>> widget.mode == z3c.form.interfaces.INPUT_MODE
   True
   >>> print widget.render()

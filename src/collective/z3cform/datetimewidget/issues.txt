@@ -98,7 +98,7 @@ ISSUE 2
   ...     )
   >>> widget.update()
   >>> widget.value
-  ('', '1', '', '13', '00')
+  ('', '1', '', '01', '00')
 
   Generate our JS and check the results.
 
@@ -131,7 +131,7 @@ ISSUE 2
   ...     )
   >>> widget.update()
   >>> widget.value
-  ('2011', '12', '31', '13', '00')
+  ('2011', '12', '31', '01', '00')
 
   Note that our date should get included like this as a string to avoid
   date offset issues as Javascript expects Date objects defined as

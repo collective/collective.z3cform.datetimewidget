@@ -28,6 +28,7 @@ from datetime import datetime
 from widget_date import DateWidget
 from interfaces import IDatetimeWidget
 
+
 class DatetimeWidget(DateWidget):
     """ DateTime widget """
 
@@ -38,8 +39,18 @@ class DatetimeWidget(DateWidget):
 
     @property
     def ampm(self):
+        if 'ampm' in self.__dict__:
+            return self.__dict__['ampm']  # hook for tests to force 12-hour clock
         pattern = self.request.locale.dates.getFormatter('time').getPattern()
         return bool('a' in pattern)
+
+    @ampm.setter
+    def ampm(self, value):
+        self.__dict__['ampm'] = value
+
+    @ampm.deleter
+    def ampm(self):
+        del self.__dict__['ampm']
 
     @property
     def formatted_value(self):
