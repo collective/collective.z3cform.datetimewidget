@@ -69,6 +69,9 @@ class DatetimeWidget(DateWidget):
     def hour(self):
         hour = self.request.get(self.name+'-hour', None)
         if hour:
+            ampm = self.request.get(self.name + '-ampm')
+            if ampm == 'PM' and hour != '12':
+                hour = str(12+int(hour))
             return hour
         return self.value[3]
 
