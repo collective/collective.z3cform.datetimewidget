@@ -28,7 +28,7 @@ from widget_monthyear import MonthYearWidget, MonthYearFieldWidget
 
 def deprecated_widget(widget):
     deprecated(widget, widget + \
-        ' moved. Access it from collection.z3cform.datetimewidget.')
+        ' moved. Access it from collective.z3cform.datetimewidget.')
 
 deprecated_widget('DateWidget')
 deprecated_widget('DateFieldWidget')
