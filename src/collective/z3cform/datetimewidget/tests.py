@@ -1,4 +1,4 @@
-#-*- coding: utf-8 -*- 
+#-*- coding: utf-8 -*-
 
 #############################################################################
 #                                                                           #
@@ -31,6 +31,7 @@ from z3c.form.interfaces import IFormLayer
 from Testing import ZopeTestCase as ztc
 from StringIO import StringIO
 import z3c.form
+import zope.browserresource
 import zope.component
 import zope.publisher
 import zope.traversing
@@ -68,6 +69,7 @@ class WidgetTestCase(object):
             </configure>
              '''))
         xmlconfig.XMLConfig('meta.zcml', zope.i18n)()
+        xmlconfig.XMLConfig('meta.zcml', zope.browserresource)()
         xmlconfig.XMLConfig('meta.zcml', z3c.form)()
         xmlconfig.XMLConfig('configure.zcml', collective.z3cform.datetimewidget)()
 
