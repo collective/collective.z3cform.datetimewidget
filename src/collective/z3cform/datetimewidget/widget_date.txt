@@ -6,7 +6,6 @@ All necessary components are set up in the testclass to make sure that
 we test the real configuration. Let's render the widgets in different
 modes and try to extract the value form an request.
 
-  >>> import IT-FAILS-FOR-SURE
   >>> import datetime
   >>> import z3c.form
   >>> import zope.schema
