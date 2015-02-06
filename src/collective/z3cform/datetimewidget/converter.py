@@ -25,16 +25,21 @@ from z3c.form.converter import BaseDataConverter
 from collective.z3cform.datetimewidget.interfaces import DateValidationError, DatetimeValidationError
 
 class DateDataConverter(BaseDataConverter):
-    
+
     def toWidgetValue(self, value):
         if value is self.field.missing_value:
             return ('', '', '')
         return (value.year, value.month, value.day)
 
     def toFieldValue(self, value):
-        for val in value:
-            if not val:
-                return self.field.missing_value
+        if len(value) != 3:
+            raise DateValidationError
+
+        year, month, day = value
+
+        if not year \
+                and not day:
+            return self.field.missing_value
 
         try:
             value = map(int, value)
@@ -46,16 +51,21 @@ class DateDataConverter(BaseDataConverter):
             raise DateValidationError
 
 class DatetimeDataConverter(DateDataConverter):
-    
+
     def toWidgetValue(self, value):
         if value is self.field.missing_value:
             return ('', '', '', '00', '00')
         return (value.year, value.month, value.day, value.hour, value.minute)
 
     def toFieldValue(self, value):
-        for val in value:
-            if not val:
-                return self.field.missing_value
+        if len(value) != 5:
+            raise DatetimeValidationError
+
+        year, month, day, hour, minute = value
+
+        if not year \
+                and not day:
+            return self.field.missing_value
 
         try:
             value = map(int, value)
