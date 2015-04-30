@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-version = '1.2.7.dev0'
+version = '1.2.7'
 
 setup(name='collective.z3cform.datetimewidget',
       version=version,
