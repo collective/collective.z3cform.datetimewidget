@@ -5,8 +5,8 @@ version = '1.2.8.dev0'
 setup(name='collective.z3cform.datetimewidget',
       version=version,
       description="z3c.form date and datetime widgets",
-      long_description=open("README.txt").read() + "\n" +
-          open("HISTORY.txt").read(),
+      long_description=open("README.rst").read() + "\n" +
+          open("HISTORY.rst").read(),
       classifiers=[
         "Programming Language :: Python",
         "Topic :: Software Development :: Libraries :: Python Modules",
