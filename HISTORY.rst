@@ -4,8 +4,8 @@ Changelog
 1.2.8 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Prevent invalid data to be silently accepted.
+  [bogdangi]
 
 1.2.7 (2015-04-29)
 ------------------

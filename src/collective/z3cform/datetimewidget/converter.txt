@@ -37,10 +37,10 @@ We can also convert widget values to field values.
     >>> converter.toFieldValue(('2009', '5', '10'))
     datetime.date(2009, 5, 10)
 
-If any of the widget value components is missing, a value of None will be
+If day and year of the widget value components is missing, a value of None will be
 returned.
 
-    >>> converter.toFieldValue(('', '5', '10')) is None
+    >>> converter.toFieldValue(('', '5', '')) is None
     True
 
 If all of the widget value components are present but they don't correspond to
@@ -52,3 +52,42 @@ a valid date, a validation error will be raised.
     DateValidationError
 
 
+Let's set up a datetime field, datetime widget, and a converter adapting both of them.
+
+    >>> from zope.schema import Datetime
+    >>> from collective.z3cform.datetimewidget import DatetimeWidget
+    >>> from collective.z3cform.datetimewidget.converter import DatetimeDataConverter
+    >>> field = Datetime()
+    >>> request = TestRequest()
+    >>> widget = DatetimeWidget(request)
+    >>> converter = DatetimeDataConverter(field, widget)
+
+Now we can convert field values to widget values.
+
+    >>> from datetime import datetime
+    >>> converter.toWidgetValue(datetime(2009, 5, 10, 15, 35))
+    (2009, 5, 10, 15, 35)
+
+A value of None results in a tuple of empty strings.
+
+    >>> converter.toWidgetValue(None)
+    ('', '', '', '00', '00')
+
+We can also convert widget values to field values.
+
+    >>> converter.toFieldValue(('2009', '5', '10', '15', '35'))
+    datetime.datetime(2009, 5, 10, 15, 35)
+
+If day and year of the widget value components is missing, a value of None will be
+returned.
+
+    >>> converter.toFieldValue(('', '5', '', '00', '00')) is None
+    True
+
+If all of the widget value components are present but they don't correspond to
+a valid date, a validation error will be raised.
+
+    >>> converter.toFieldValue(('2009', '42', '42', '42', '82'))
+    Traceback (most recent call last):
+    ...
+    DatetimeValidationError
