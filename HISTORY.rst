@@ -1,8 +1,10 @@
 Changelog
 =========
 
-1.2.8 (unreleased)
+1.2.8 (2017-09-08)
 ------------------
+
+Bug fixes:
 
 - Prevent invalid data to be silently accepted.
   [bogdangi]

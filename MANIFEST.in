@@ -1,6 +1,10 @@
 include *.txt
+include *.rst
 
 recursive-include src *
 recursive-include docs *
 
 global-exclude *.pyc
+exclude bootstrap.py
+exclude buildout.cfg
+exclude travis.cfg
