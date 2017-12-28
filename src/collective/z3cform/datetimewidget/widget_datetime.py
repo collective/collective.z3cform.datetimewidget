@@ -95,8 +95,12 @@ class DatetimeWidget(DateWidget):
 
     def padded_hour(self):
         hour = self.hour
-        if self.ampm is True and self.is_pm() and int(hour)!=12:
-            hour = str(int(hour)-12)
+        if self.ampm is True:
+            is_pm = self.is_pm()
+            if is_pm and int(hour) != 12:
+                hour = str(int(hour) - 12)
+            elif not is_pm and int(hour) == 0:
+                hour = '12'
         return self._padded_value(hour)
 
     def padded_minute(self):
@@ -111,15 +115,18 @@ class DatetimeWidget(DateWidget):
         minute = self.request.get(self.name + '-min', default)
 
         if (self.ampm is True and
-            hour is not default and
-            minute is not default and
-            int(hour)!=12):
+                hour is not default and
+                minute is not default):
             ampm = self.request.get(self.name + '-ampm', default)
             if ampm == 'PM':
-                hour = str(12+int(hour))
+                if int(hour) != 12:
+                    hour = str(12 + int(hour))
+            elif ampm == 'AM':
+                if int(hour) == 12:
+                    hour = '00'
             # something strange happened since we either
             # should have 'PM' or 'AM', return default
-            elif ampm != 'AM':
+            else:
                 return default
 
         if default not in (year, month, day, hour, minute):

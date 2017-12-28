@@ -14,7 +14,8 @@ New features:
 
 Bug fixes:
 
-- *add item here*
+- Fix handling of 12:00 AM.
+  [davisagli]
 
 
 1.2.8 (2017-09-08)
