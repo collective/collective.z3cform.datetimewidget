@@ -14,7 +14,9 @@ New features:
 
 Bug fixes:
 
-- *add item here*
+- Removed compiled ``.mo`` files from repository.
+  I will create a new release, which should still contain those, including the missing Dutch ``.mo`` file.
+  [maurits]
 
 
 1.2.8 (2017-09-08)
