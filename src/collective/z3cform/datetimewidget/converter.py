@@ -1,4 +1,4 @@
-#-*- coding: utf-8 -*- 
+#-*- coding: utf-8 -*-
 
 #############################################################################
 #                                                                           #
@@ -77,7 +77,7 @@ class DatetimeDataConverter(DateDataConverter):
             raise DatetimeValidationError
 
 class MonthYearDataConverter(DateDataConverter):
-    
+
     def toWidgetValue(self, value):
         if value is self.field.missing_value:
             return ('', '', '1')

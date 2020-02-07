@@ -87,6 +87,18 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
         self._set_yearRange()
 
     @property
+    def safe_value(self):
+        """
+        Return always a tuple, even if None is passed in as value.
+
+        None value may appear e.g. when partial values are inputed in DataGridField
+        due to order how validation and value getting is handled.
+        """
+        if self.value is None:
+            return ('', '', '')
+        return self.value
+
+    @property
     def months(self):
         try:
             selected = int(self.month)
@@ -191,7 +203,7 @@ class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
 
         config = 'lang: "%s", ' % language
 
-        value_date = self.value[:3]
+        value_date = self.safe_value[:3]
         if '' not in value_date:
             config += 'value: new Date("%s/%s/%s"), ' % (value_date)
 
