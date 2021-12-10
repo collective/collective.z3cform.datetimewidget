@@ -24,8 +24,8 @@ import z3c.form
 import zope.schema
 import zope.interface
 import zope.component
-from widget_date import DateWidget
-from interfaces import IMonthYearWidget
+from .widget_date import DateWidget
+from .interfaces import IMonthYearWidget
 
 
 class MonthYearWidget(DateWidget):

@@ -25,8 +25,8 @@ import zope.schema
 import zope.interface
 import zope.component
 from datetime import datetime
-from widget_date import DateWidget
-from interfaces import IDatetimeWidget
+from .widget_date import DateWidget
+from .interfaces import IDatetimeWidget
 
 
 class DatetimeWidget(DateWidget):

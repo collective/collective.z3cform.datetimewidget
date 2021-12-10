@@ -25,7 +25,7 @@ import z3c.form
 import z3c.form.interfaces
 import zope.schema
 
-from i18n import MessageFactory as _
+from .i18n import MessageFactory as _
 
 
 # Fields

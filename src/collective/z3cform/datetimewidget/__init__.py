@@ -20,7 +20,7 @@
 #############################################################################
 __docformat__ = "reStructuredText"
 
-from widget_date import DateWidget, DateFieldWidget
-from widget_datetime import DatetimeWidget, DatetimeFieldWidget
-from widget_monthyear import MonthYearWidget, MonthYearFieldWidget
+from .widget_date import DateWidget, DateFieldWidget
+from .widget_datetime import DatetimeWidget, DatetimeFieldWidget
+from .widget_monthyear import MonthYearWidget, MonthYearFieldWidget
 
