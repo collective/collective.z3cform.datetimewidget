@@ -28,10 +28,10 @@ from .widget_date import DateWidget
 from .interfaces import IMonthYearWidget
 
 
+@zope.interface.implementer_only(IMonthYearWidget)
 class MonthYearWidget(DateWidget):
     """ Month and year widget """
 
-    zope.interface.implementsOnly(IMonthYearWidget)
 
     klass = u'monthyear-widget'
     value = ('', '', 1)

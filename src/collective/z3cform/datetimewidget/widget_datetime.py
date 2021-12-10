@@ -29,10 +29,10 @@ from .widget_date import DateWidget
 from .interfaces import IDatetimeWidget
 
 
+@zope.interface.implementer_only(IDatetimeWidget)
 class DatetimeWidget(DateWidget):
     """ DateTime widget """
 
-    zope.interface.implementsOnly(IDatetimeWidget)
 
     klass = u'datetime-widget'
     value = ('', '', '', '00', '00')
