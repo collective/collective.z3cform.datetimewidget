@@ -25,14 +25,17 @@ import zope.schema
 import zope.interface
 import zope.component
 from datetime import datetime
-from widget_date import DateWidget
-from interfaces import IDatetimeWidget
+from .widget_date import DateWidget
+from .interfaces import IDatetimeWidget
+
+if 'unicode' not in locals():
+    unicode = str
 
 
+@zope.interface.implementer_only(IDatetimeWidget)
 class DatetimeWidget(DateWidget):
     """ DateTime widget """
 
-    zope.interface.implementsOnly(IDatetimeWidget)
 
     klass = u'datetime-widget'
     value = ('', '', '', '00', '00')

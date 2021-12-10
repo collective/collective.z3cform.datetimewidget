@@ -27,16 +27,16 @@ import z3c.form
 import z3c.form.browser.widget
 import z3c.form.widget
 from datetime import date, datetime
-from interfaces import IDateWidget
-from i18n import MessageFactory as _
+from .interfaces import IDateWidget
+from .i18n import MessageFactory as _
 from Products.CMFCore.utils import getToolByName
 
 
+@zope.interface.implementer_only(IDateWidget)
 class DateWidget(z3c.form.browser.widget.HTMLTextInputWidget,
                  z3c.form.widget.Widget):
     """ Date widget. """
 
-    zope.interface.implementsOnly(IDateWidget)
 
     calendar_type = 'gregorian'
     klass = u'date-widget'
