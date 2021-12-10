@@ -23,7 +23,7 @@ __docformat__ = "reStructuredText"
 import doctest
 import unittest
 import zope.component.testing
-from zope.interface import implements
+from zope.interface import implementer
 from zope.publisher.browser import TestRequest
 from z3c.form.interfaces import IFieldWidget
 from z3c.form.interfaces import IFormLayer
@@ -43,8 +43,8 @@ class DummyContext(object):
     pass
 
 
+@implementer(IFormLayer)
 class TestRequest(TestRequest):
-    implements(IFormLayer)
 
 
 class WidgetTestCase(object):
